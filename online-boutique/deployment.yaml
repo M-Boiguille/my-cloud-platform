@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: online-boutique
+  namespace: online-boutique
+  labels:
+    app: online-boutique
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: online-boutique
+  template:
+    metadata:
+      labels:
+        app: online-boutique
+    spec:
+      containers:
+        - name: online-boutique
+          image: ghcr.io/m-boiguille/online-boutique:TAG
+          ports:
+            - containerPort: 5000
+          env:
+            - name: APP_VERSION
+              value: "TAG"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 5000
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
