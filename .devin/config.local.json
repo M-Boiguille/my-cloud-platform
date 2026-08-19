@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Exec(git)",
+      "Exec(python3)",
+      "Exec(rm)",
+      "Exec(pip install)",
+      "Exec(.)",
+      "Exec(PYTHONPATH=.:core pytest)",
+      "Exec(ruff check)",
+      "Exec(mypy)",
+      "Exec(python)",
+      "Exec(mv)",
+      "Exec(gh pr)",
+      "Exec(sleep)",
+      "Exec(gh run)",
+      "Exec(gh issue)",
+      "Exec(gh workflow)",
+      "Exec(sed)",
+      "Exec(tar)",
+      "Exec(gh repo)",
+      "Exec(ls)",
+      "Exec(cp)"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+# Support interne — ne pas publier
+AI_STORY.md
+ANNONCES.md
+SUPPORT_LOCAL.md
+SPRINTS_LOCAL.md
+
+# Terraform / secrets
+*.tfvars
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Ansible
+*.retry
+
+# IDE
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Runtime / secrets
+.env
+*.pem
+kubeconfig*
+
+# Données locales joueur (générées ou sensibles)
+data/logs/
+
+# Cache LLM (optionnel à versionner, commenter si besoin d'audit externe)
+# data/cache/llm/
+

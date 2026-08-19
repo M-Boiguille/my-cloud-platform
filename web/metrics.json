@@ -1,0 +1,20 @@
+{
+  "player": "autodidact",
+  "level": "confirme",
+  "target_level": "SRE",
+  "missions_completed": 0,
+  "skills": {
+    "Linux / Réseau": 70,
+    "Docker": 70,
+    "Kubernetes": 75,
+    "CI/CD": 50,
+    "Terraform": 30,
+    "Observabilité": 65,
+    "Ansible": 40
+  },
+  "known_concepts_count": 53,
+  "upcoming_concepts_count": 120,
+  "active_courses": [
+    "CKA"
+  ]
+}

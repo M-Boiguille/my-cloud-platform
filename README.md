@@ -1,55 +1,41 @@
 # My Cloud Platform
 
-Plateforme Cloud-native de démonstration pour le profil SRE / DevOps confirmé.
+Portfolio DevOps / SRE en reconstruction : infrastructure as code, Kubernetes, CI/CD, GitOps, observability et AIOps.
 
-## Objectif
+Chaque couche est d'abord implémentée **à la main** (`raw/`), puis versionnée avec l'outillage standard (`tooled/`). Cette méthode prouve que je comprends ce que chaque abstraction automatise.
 
-Montrer la maîtrise complète du cycle de vie d'une application sur Kubernetes :
+## Parcours de missions
+
+Le moteur de missions génère le contexte et les évaluations. Les livrables sont écrits manuellement.
 
 ```
-Infrastructure (Terraform / AWS free tier)
-    ↓
-Kubernetes (k3s / EKS)
-    ↓
-Application (online-boutique)
-    ↓
-CI/CD (GitHub Actions)
-    ↓
-GitOps (Argo CD)
-    ↓
-Observability (Prometheus / Grafana / Loki)
-    ↓
-Chaos / Resilience
+Phase 1 — Isolation Linux à la main
+Phase 2 — Kubernetes 3-tiers, raw puis Helm
+Phase 3 — CI/CD, raw puis Marketplace
+Phase 4 — Infra Terraform + observabilité instrumentée
+Phase 5 — Sécurité + GitOps
+Phase 6 — AIOps & auto-remédiation
 ```
 
 ## Structure
 
-| Dossier | Contenu |
-|---------|---------|
-| `infrastructure/terraform/` | VPC, EKS, IAM, S3, Route53 |
-| `kubernetes/base/` | Namespaces, NetworkPolicies, RBAC |
-| `kubernetes/environments/` | Staging, production overlays |
-| `kubernetes/policies/` | Kyverno / OPA Gatekeeper |
-| `application/` | Code source de l'application simplifiée |
-| `online-boutique/` | Déploiement de l'application |
-| `cicd/` | GitHub Actions, workflows réutilisables |
-| `gitops/` | Charts Helm, Argo CD applications |
-| `observability/` | Prometheus, Grafana, Loki, Alertmanager |
-| `chaos/` | Scénarios de panne et postmortems |
-| `docs/runbooks/` | Procédures d'intervention |
+| Dossier | Rôle |
+|---------|------|
+| `infrastructure/terraform/raw/` | Ressources Terraform brutes (manuel) |
+| `infrastructure/terraform/modules/` | Modules Terraform communautaires (toole) |
+| `kubernetes/application/manifests-raw/` | Manifestes K8s bruts (manuel) |
+| `kubernetes/application/helm-chart/` | Chart Helm (toole) |
+| `kubernetes/policies/` | NetworkPolicy, PSS, Kyverno |
+| `cicd/github-actions/` | Pipelines raw et Marketplace |
+| `gitops/argocd/` | Applications Argo CD |
+| `observability/` | Prometheus, Grafana, Loki, instrumentation |
+| `chaos/` | Fault injection, aiops-agent |
+| `security/` | AppArmor, Seccomp, cosign, Falco |
+| `networking/docs/` | Schémas et cas de panne |
+| `docs/` | Architecture, runbooks, postmortems |
 
-## Parcours métier
+## Moteur de missions
 
-Voir [docs/parcours-sre.md](docs/parcours-sre.md).
+Le moteur est dans `core/`. Il génère le contexte de mission, ouvre une issue, relit la PR et évalue la progression.
 
-## Compétences démontrées
-
-- Linux / Bash / Python
-- Git / GitHub Actions
-- Docker / BuildKit / Trivy
-- Kubernetes / Helm / Argo CD
-- Terraform / AWS
-- Networking / DNS / TLS
-- Observability / Alerting
-- Troubleshooting / Postmortem
-- Security / Secrets management
+Lancer une nouvelle mission : `gh workflow run generate-mission`.

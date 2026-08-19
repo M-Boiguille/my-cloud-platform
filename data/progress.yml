@@ -1,0 +1,18 @@
+player:
+  name: autodidact
+  current_level: confirme
+  current_mission: my-cloud-platform
+  target_level: SRE
+  certifications:
+  - name: LFCS
+    status: obtained
+    date: 2025-XX-XX
+  active_courses:
+  - name: CKA
+    url: https://kodekloud.com/courses/certified-kubernetes-administrator/
+    completed_modules: 13
+    total_modules: 14
+
+completed_missions: []
+validated_concepts: []
+skills_overrides: {}

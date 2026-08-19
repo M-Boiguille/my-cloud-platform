@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cloud Platform — Portfolio SRE / DevOps | M-B Data</title>
+    <meta name="description" content="Portfolio DevOps / SRE en reconstruction. Chaque couche est d'abord implémentée à la main, puis outillée.">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <h1>My Cloud Platform</h1>
+            <p class="tagline">Portfolio SRE / DevOps confirmé</p>
+            <p class="pitch">
+                Je construis une plateforme cloud-native couche par couche : infrastructure,
+                Kubernetes, CI/CD, GitOps, observabilité, sécurité et AIOps. Chaque mécanisme
+                est d'abord écrit à la main avant d'être industrialisé.
+            </p>
+            <div class="cta">
+                <a class="btn" href="https://github.com/M-Boiguille/my-cloud-platform" target="_blank" rel="noopener">Voir le repo</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="metrics" id="summary">
+            <h2>Progression en temps réel</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Niveau actuel</h3>
+                    <p id="level">-</p>
+                </div>
+                <div class="card">
+                    <h3>Niveau cible</h3>
+                    <p id="target">-</p>
+                </div>
+                <div class="card">
+                    <h3>Missions validées</h3>
+                    <p id="missions">-</p>
+                </div>
+                <div class="card">
+                    <h3>Concepts connus</h3>
+                    <p id="known">-</p>
+                </div>
+                <div class="card">
+                    <h3>Concepts à venir</h3>
+                    <p id="upcoming">-</p>
+                </div>
+                <div class="card">
+                    <h3>Cours actifs</h3>
+                    <p id="courses">-</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="split">
+            <div class="radar-box">
+                <h2>Radar de compétences</h2>
+                <canvas id="skillsChart"></canvas>
+            </div>
+            <div class="about">
+                <h2>En quoi ce projet est une preuve</h2>
+                <ul>
+                    <li><strong>Workflow d'entreprise :</strong> issues, PRs, review, merge.</li>
+                    <li><strong>Deep then tool :</strong> chaque couche implémentée à la main, puis outillée.</li>
+                    <li><strong>Automatisation :</strong> GitHub Actions génèrent et vérifient chaque mission.</li>
+                    <li><strong>Preuve par la panne :</strong> scénarios de chaos, runbooks et postmortems.</li>
+                    <li><strong>AIOps contrôlé :</strong> l'IA propose, l'humain valide.</li>
+                </ul>
+                <p class="current-mission">
+                    <strong>Mission en cours :</strong>
+                    <a id="mission-link" href="https://github.com/M-Boiguille/my-cloud-platform/issues" target="_blank" rel="noopener">voir l'issue générée par l'IA</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            Généré automatiquement depuis <a href="https://github.com/M-Boiguille/my-cloud-platform" target="_blank" rel="noopener">my-cloud-platform</a>.
+            Chaque commit, issue et review est public.
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

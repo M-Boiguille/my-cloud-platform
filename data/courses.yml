@@ -1,0 +1,392 @@
+courses:
+- name: CKA
+  url: https://kodekloud.com/courses/certified-kubernetes-administrator/
+  modules:
+  - name: Introduction
+    concepts:
+    - kubernetes-overview
+    - certification-format
+    completed: true
+  - name: Core Concepts
+    concepts:
+    - pods
+    - replicasets
+    - deployments
+    - namespaces
+    - services
+    - kubectl
+    completed: true
+  - name: Scheduling
+    concepts:
+    - manual-scheduling
+    - taints-tolerations
+    - node-affinity
+    - daemonsets
+    - static-pods
+    completed: true
+  - name: Logging and Monitoring
+    concepts:
+    - metrics-server
+    - application-logs
+    completed: true
+  - name: Application Lifecycle Management
+    concepts:
+    - rolling-updates
+    - rollback
+    - configmaps
+    - secrets
+    - init-containers
+    - multi-container-pods
+    completed: true
+  - name: Cluster Maintenance
+    concepts:
+    - os-upgrades
+    - cluster-upgrade
+    - etcd-backup-restore
+    completed: true
+  - name: Security
+    concepts:
+    - authentication
+    - tls-certificates
+    - kubeconfig
+    - rbac
+    - cluster-roles
+    - image-security
+    - security-context
+    - network-policies
+    completed: true
+  - name: Storage
+    concepts:
+    - volumes
+    - persistent-volumes
+    - persistent-volume-claims
+    - storage-class
+    - csi
+    completed: true
+  - name: Networking
+    concepts:
+    - cni
+    - pod-networking
+    - service-networking
+    - coredns
+    - ingress
+    completed: true
+  - name: Design and Install Kubernetes Cluster
+    concepts:
+    - cluster-design
+    - high-availability
+    - etcd-ha
+    completed: true
+  - name: Install Kubernetes the kubeadm way
+    concepts:
+    - kubeadm
+    - cluster-provisioning
+    completed: true
+  - name: Troubleshooting
+    concepts:
+    - application-failure
+    - control-plane-failure
+    - worker-node-failure
+    - network-troubleshooting
+    completed: true
+  - name: Other Topics
+    concepts:
+    - json-path
+    - advanced-kubectl
+    completed: true
+  - name: Mock Exams
+    concepts:
+    - exam-simulation
+    - timed-practice
+    completed: false
+- name: Kubernetes Networking
+  url: https://kodekloud.com/courses/kubernetes-networking/
+  modules:
+  - name: Fondamentaux réseau
+    concepts:
+    - switching
+    - routing
+    - dns
+    - network-namespaces
+    completed: false
+  - name: CNI en profondeur
+    concepts:
+    - cni
+    - weave
+    - calico
+    - cilium
+    completed: false
+  - name: Service networking et Ingress
+    concepts:
+    - cluster-ip
+    - nodeport
+    - ingress-controllers
+    completed: false
+  - name: DNS et CoreDNS
+    concepts:
+    - coredns
+    - service-discovery
+    completed: false
+- name: Git
+  url: https://kodekloud.com/courses/git-for-beginners/
+  modules:
+  - name: Bases de Git
+    concepts:
+    - git-init
+    - commit
+    - staging-area
+    completed: false
+  - name: Branches et fusion
+    concepts:
+    - branching
+    - merge
+    - rebase
+    - conflicts
+    completed: false
+  - name: Dépôts distants
+    concepts:
+    - github
+    - push
+    - pull
+    - clone
+    - fork
+    completed: false
+  - name: Workflows collaboratifs
+    concepts:
+    - pull-requests
+    - git-flow
+    - code-review
+    completed: false
+- name: Shell Scripts for Beginners
+  url: https://kodekloud.com/courses/shell-scripts-for-beginners/
+  modules:
+  - name: Bases du scripting shell
+    concepts:
+    - bash
+    - shebang
+    - variables
+    completed: false
+  - name: Structures de contrôle
+    concepts:
+    - loops
+    - conditionals
+    - case-statements
+    completed: false
+  - name: Fonctions et arguments
+    concepts:
+    - functions
+    - positional-parameters
+    completed: false
+- name: Advanced Bash Scripting
+  url: https://kodekloud.com/courses/advanced-bash-scripting/
+  modules:
+  - name: Techniques bash avancées
+    concepts:
+    - arrays
+    - subshells
+    - process-substitution
+    completed: false
+  - name: Traitement de texte
+    concepts:
+    - grep
+    - sed
+    - awk
+    - regex
+    completed: false
+  - name: Gestion d'erreurs
+    concepts:
+    - exit-codes
+    - trap
+    - set-e
+    completed: false
+  - name: Scripts d'automatisation
+    concepts:
+    - cron
+    - automation-patterns
+    completed: false
+- name: Terraform Associate Certification
+  url: https://kodekloud.com/courses/terraform-for-beginners/
+  modules:
+  - name: Fondamentaux IaC
+    concepts:
+    - infrastructure-as-code
+    - hcl
+    - providers
+    completed: false
+  - name: Workflow Terraform
+    concepts:
+    - terraform-init
+    - plan
+    - apply
+    - destroy
+    completed: false
+  - name: Gestion du state
+    concepts:
+    - state-file
+    - remote-backend
+    - state-locking
+    completed: false
+  - name: Modules et provisioners
+    concepts:
+    - modules
+    - variables
+    - outputs
+    - provisioners
+    completed: false
+  - name: HCP Terraform
+    concepts:
+    - terraform-cloud
+    - workspaces
+    - remote-execution
+    completed: false
+- name: GitHub Actions
+  url: https://kodekloud.com/courses/github-actions/
+  modules:
+  - name: Bases des workflows
+    concepts:
+    - yaml-workflow
+    - jobs
+    - steps
+    completed: false
+  - name: Triggers et événements
+    concepts:
+    - on-push
+    - on-pull-request
+    - schedule
+    completed: false
+  - name: Secrets et environnements
+    concepts:
+    - secrets
+    - environments
+    - permissions
+    completed: false
+  - name: Workflows réutilisables
+    concepts:
+    - reusable-workflows
+    - composite-actions
+    - marketplace
+    completed: false
+- name: AWS Cloud Practitioner
+  url: https://kodekloud.com/courses/aws-cloud-practitioner/
+  modules:
+  - name: Concepts Cloud
+    concepts:
+    - cloud-computing
+    - aws-global-infrastructure
+    completed: false
+  - name: Sécurité et conformité
+    concepts:
+    - iam
+    - shared-responsibility-model
+    - compliance
+    completed: false
+  - name: Technologie - services core
+    concepts:
+    - ec2
+    - s3
+    - vpc
+    - rds
+    - lambda
+    completed: false
+  - name: Facturation et pricing
+    concepts:
+    - billing
+    - pricing-models
+    - support-plans
+    completed: false
+- name: Ansible Basics
+  url: https://kodekloud.com/courses/ansible-basics/
+  modules:
+  - name: Fondamentaux Ansible
+    concepts:
+    - agentless
+    - ssh
+    - idempotency
+    completed: false
+  - name: Inventaire et playbooks
+    concepts:
+    - inventory
+    - playbooks
+    - yaml
+    completed: false
+  - name: Commandes ad-hoc
+    concepts:
+    - ad-hoc-commands
+    - modules
+    completed: false
+  - name: Roles et templates
+    concepts:
+    - roles
+    - jinja2-templates
+    - variables
+    completed: false
+- name: Fundamentals of DevOps
+  url: https://kodekloud.com/courses/devops-fundamentals/
+  modules:
+  - name: Culture DevOps
+    concepts:
+    - calms-framework
+    - collaboration
+    - devops-culture
+    completed: false
+  - name: CI/CD fondamentaux
+    concepts:
+    - continuous-integration
+    - continuous-delivery
+    completed: false
+  - name: Infrastructure as Code
+    concepts:
+    - iac-principles
+    - configuration-management
+    completed: false
+  - name: Monitoring et feedback loops
+    concepts:
+    - observability
+    - feedback-loops
+    completed: false
+- name: Prometheus Certified Associate
+  url: https://kodekloud.com/courses/prometheus-certified-associate/
+  modules:
+  - name: Architecture Prometheus
+    concepts:
+    - prometheus-architecture
+    - time-series-db
+    completed: false
+  - name: PromQL
+    concepts:
+    - promql
+    - queries
+    - aggregations
+    completed: false
+  - name: Alerting
+    concepts:
+    - alertmanager
+    - alert-rules
+    completed: false
+  - name: Exporters et service discovery
+    concepts:
+    - exporters
+    - service-discovery
+    completed: false
+- name: Grafana Loki
+  url: https://kodekloud.com/courses/grafana-loki/
+  modules:
+  - name: Architecture Loki
+    concepts:
+    - loki-architecture
+    - log-aggregation
+    completed: false
+  - name: LogQL
+    concepts:
+    - logql
+    - queries
+    completed: false
+  - name: Pipelines d'agrégation de logs
+    concepts:
+    - promtail
+    - log-pipelines
+    completed: false
+  - name: Dashboards Grafana pour les logs
+    concepts:
+    - grafana-dashboards
+    completed: false
