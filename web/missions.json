@@ -1,0 +1,56 @@
+[
+  {
+    "mission_id": "mcp-001",
+    "title": "Implémentation manuelle du pipeline CI/CD de my-cloud-platform",
+    "level": "confirme",
+    "deadline": "5 jours ouvrés à partir de l'acceptation de la mission.",
+    "estimated_time_minutes": 240,
+    "data": {
+      "mission_id": "mcp-001",
+      "title": "Implémentation manuelle du pipeline CI/CD de my-cloud-platform",
+      "level": "confirme",
+      "client_brief": "Le portfolio my-cloud-platform vise à démontrer la maîtrise du cycle de vie d'une application cloud-native. Chaque couche (Linux, Kubernetes, CI/CD, Infra+Observabilité, Sécurité+GitOps, AIOps) est d'abord implémentée manuellement (raw) puis outillée. Vous avez validé la phase 2 (Kubernetes). Vous attaquez maintenant la phase 3 : CI/CD. Cette mission consiste à créer un premier pipeline de build et de déploiement à la main, sans outil type GitHub Actions, pour comprendre les fondamentaux avant d'introduire des solutions automatisées.",
+      "description": "Vous devez containeriser une application simple (par exemple un serveur HTTP en Node.js ou Python) via un Dockerfile, puis écrire un script shell (pipeline.sh) qui exécute les étapes de CI/CD : vérification du code (lint, tests unitaires éventuels), construction de l'image Docker, et déploiement sur votre cluster Kubernetes (k3s ou EKS) via un manifeste de déploiement mis à jour avec la nouvelle image. Le script doit être robuste (gestion d'erreurs avec set -e, logs clairs) et idempotent (exécutable plusieurs fois sans effet de bord). Vous documenterez la procédure dans un runbook.",
+      "business_impact": "Ceci est la base de votre chaîne de livraison. Une fois fonctionnel, vous pourrez automatiser ces étapes avec des outils comme GitHub Actions ou GitLab CI, puis intégrer Argo CD pour le GitOps. Un pipeline manuel bien compris garantit que vous savez diagnostiquer les pannes et personnaliser les automatisations ultérieures. C'est une compétence attendue dans les équipes SRE/DevOps.",
+      "constraints": "Aucun outil de CI/CD centralisé (GitHub Actions, Jenkins, GitLab CI) ne doit être utilisé. Tout doit être exécuté localement ou sur votre cluster. Le script doit être écrit en bash et s'appuyer sur les commandes standard (docker, kubectl, etc.). Vous devez gérer vous-même les erreurs et les retours de code. L'application choisie doit être minimaliste mais fonctionnelle.",
+      "deadline": "5 jours ouvrés à partir de l'acceptation de la mission.",
+      "new_concepts": [
+        "continuous-integration",
+        "continuous-delivery",
+        "bash",
+        "set-e",
+        "dockerfile",
+        "exit-codes"
+      ],
+      "prerequisites": [
+        "deployments",
+        "kubectl",
+        "pods",
+        "services",
+        "package-management"
+      ],
+      "learning_links": [
+        "https://docs.docker.com/get-started/",
+        "https://kubernetes.io/docs/reference/kubectl/",
+        "https://www.gnu.org/software/bash/manual/"
+      ],
+      "acceptance_criteria": [
+        "Le Dockerfile est présent à la racine du projet et construit une image fonctionnelle de l'application.",
+        "Le script pipeline.sh est présent, exécutable, et implémente les étapes de build, test (si applicable) et déploiement.",
+        "Le script utilise set -e pour s'arrêter en cas d'erreur et affiche des messages de progression clairs.",
+        "Un manifeste Kubernetes (deployment.yaml) est fourni et est mis à jour par le script (par exemple en remplaçant le tag de l'image).",
+        "Le script a été exécuté avec succès sur un cluster Kubernetes réel, et la commande kubectl rollout status deployment/<nom> confirme le déploiement.",
+        "Un runbook (RUNBOOK.md) explique la procédure, les prérequis, les commandes à lancer et les erreurs courantes."
+      ],
+      "estimated_time_minutes": 240,
+      "deliverables": [
+        "Dockerfile",
+        "pipeline.sh",
+        "deployment.yaml",
+        "RUNBOOK.md",
+        "test.sh"
+      ]
+    },
+    "current": true
+  }
+]

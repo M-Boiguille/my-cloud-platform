@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missions — My Cloud Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f6f8fa;
+            color: #1f2328;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        .current-card {
+            background: #fff;
+            border: 1px solid #d1d9e0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(31, 35, 40, 0.05);
+        }
+        .current-card h2 {
+            margin-top: 0;
+            font-size: 1.6rem;
+        }
+        .badges {
+            margin-bottom: 1rem;
+        }
+        .badge {
+            display: inline-block;
+            padding: .25rem .6rem;
+            border-radius: 12px;
+            background: #ddf4ff;
+            color: #0550ae;
+            font-size: .85rem;
+            margin-right: .5rem;
+        }
+        .badge.current {
+            background: #dafbe1;
+            color: #1a7f37;
+        }
+        .meta {
+            color: #656d76;
+            margin-bottom: 1.5rem;
+        }
+        .section {
+            margin-top: 1.5rem;
+        }
+        .section h3 {
+            font-size: 1.1rem;
+            border-bottom: 1px solid #d1d9e0;
+            padding-bottom: .3rem;
+            margin-bottom: .6rem;
+        }
+        .section p {
+            line-height: 1.6;
+        }
+        .section ul {
+            padding-left: 1.2rem;
+        }
+        .section li {
+            margin-bottom: .4rem;
+            line-height: 1.5;
+        }
+        code {
+            background: #f3f4f6;
+            padding: .1rem .3rem;
+            border-radius: 4px;
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: .55rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #d1d9e0;
+        }
+        .mission-item {
+            position: relative;
+            margin-bottom: 1.2rem;
+        }
+        .mission-item::before {
+            content: "";
+            position: absolute;
+            left: -1.55rem;
+            top: .4rem;
+            width: .7rem;
+            height: .7rem;
+            border-radius: 50%;
+            background: #656d76;
+        }
+        .mission-item.current::before {
+            background: #0550ae;
+            box-shadow: 0 0 0 4px #ddf4ff;
+        }
+        .mission-title {
+            cursor: pointer;
+            font-weight: 600;
+            color: #0969da;
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 1rem;
+            text-align: left;
+        }
+        .mission-title:hover {
+            text-decoration: underline;
+        }
+        .mission-detail {
+            display: none;
+            margin-top: .6rem;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #d1d9e0;
+        }
+        .mission-detail.open {
+            display: block;
+        }
+        .empty {
+            color: #656d76;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Missions my-cloud-platform</h1>
+        <div id="current-mission"></div>
+
+        <h2>Frise temporelle</h2>
+        <div id="timeline" class="timeline"></div>
+    </div>
+
+    <script>
+        async function loadMissions() {
+            const res = await fetch('missions.json');
+            if (!res.ok) {
+                document.getElementById('current-mission').innerHTML = '<p class="empty">Impossible de charger les missions.</p>';
+                return;
+            }
+            const missions = await res.json();
+
+            const currentIndex = missions.findIndex(m => m.current);
+            const current = currentIndex !== -1 ? missions[currentIndex] : missions[missions.length - 1];
+            const others = missions.filter(m => m.mission_id !== current.mission_id);
+
+            const d = current.data;
+            const currentEl = document.getElementById('current-mission');
+            currentEl.innerHTML = `
+                <div class="current-card">
+                    <div class="badges">
+                        <span class="badge current">en cours</span>
+                        <span class="badge">${d.level}</span>
+                    </div>
+                    <h2>${d.title}</h2>
+                    <div class="meta">
+                        <strong>${d.mission_id}</strong> · ${d.estimated_time_minutes} minutes · deadline : ${d.deadline}
+                    </div>
+
+                    <div class="section">
+                        <h3>Brief</h3>
+                        <p>${d.client_brief}</p>
+                    </div>
+
+                    <div class="section">
+                        <h3>Contexte</h3>
+                        <p>${d.description}</p>
+                    </div>
+
+                    <div class="section">
+                        <h3>Impact métier</h3>
+                        <p>${d.business_impact}</p>
+                    </div>
+
+                    <div class="section">
+                        <h3>Contraintes</h3>
+                        <p>${d.constraints}</p>
+                    </div>
+
+                    <div class="section">
+                        <h3>Nouvelles notions</h3>
+                        <ul>${d.new_concepts.map(c => `<li>${c}</li>`).join('')}</ul>
+                    </div>
+
+                    <div class="section">
+                        <h3>Prérequis</h3>
+                        <ul>${d.prerequisites.map(p => `<li>${p}</li>`).join('')}</ul>
+                    </div>
+
+                    <div class="section">
+                        <h3>Liens d'apprentissage</h3>
+                        <ul>${d.learning_links.map(link => `<li><a href="${link}" target="_blank" rel="noopener">${link}</a></li>`).join('')}</ul>
+                    </div>
+
+                    <div class="section">
+                        <h3>Critères d'acceptation</h3>
+                        <ul>${d.acceptance_criteria.map(c => `<li>${c}</li>`).join('')}</ul>
+                    </div>
+
+                    <div class="section">
+                        <h3>Livrables attendus</h3>
+                        <ul>${d.deliverables.map(item => `<li><code>${item}</code></li>`).join('')}</ul>
+                    </div>
+                </div>
+            `;
+
+            const timelineEl = document.getElementById('timeline');
+            if (others.length === 0) {
+                timelineEl.innerHTML = '<p class="empty">Aucune autre mission pour l’instant.</p>';
+            } else {
+                timelineEl.innerHTML = others.map(m => `
+                    <div class="mission-item ${m.current ? 'current' : ''}">
+                        <button class="mission-title" onclick="toggleMission('${m.mission_id}')">
+                            ${m.mission_id} — ${m.title}
+                        </button>
+                        <div id="detail-${m.mission_id}" class="mission-detail">
+                            <p><strong>Niveau :</strong> ${m.data.level}</p>
+                            <p><strong>Durée :</strong> ${m.data.estimated_time_minutes} minutes</p>
+                            <p>${m.data.client_brief}</p>
+                            <p><a href="https://github.com/M-Boiguille/my-cloud-platform/issues?q=${encodeURIComponent(m.mission_id)}" target="_blank" rel="noopener">Rechercher l'issue</a></p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function toggleMission(id) {
+            const el = document.getElementById(`detail-${id}`);
+            if (el) {
+                el.classList.toggle('open');
+            }
+        }
+
+        loadMissions();
+    </script>
+</body>
+</html>
