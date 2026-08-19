@@ -4,13 +4,13 @@
   "target_level": "SRE",
   "missions_completed": 0,
   "skills": {
-    "Linux / Réseau": 70,
-    "Docker": 70,
-    "Kubernetes": 75,
-    "CI/CD": 50,
-    "Terraform": 30,
-    "Observabilité": 65,
-    "Ansible": 40
+    "Linux / Réseau": 0,
+    "Docker": 0,
+    "Kubernetes": 72,
+    "CI/CD": 0,
+    "Terraform": 0,
+    "Observabilité": 0,
+    "Ansible": 0
   },
   "known_concepts_count": 53,
   "upcoming_concepts_count": 120,
