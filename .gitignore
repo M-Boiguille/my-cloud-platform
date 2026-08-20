@@ -35,6 +35,9 @@ kubeconfig*
 # Données locales joueur (générées ou sensibles)
 data/logs/
 
+# Support local interne
+SUPPORT/
+
 # Cache LLM (régénéré localement)
 data/cache/llm/
 
