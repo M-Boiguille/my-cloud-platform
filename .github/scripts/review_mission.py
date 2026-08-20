@@ -21,6 +21,17 @@ GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 PR_NUMBER = os.environ.get("PR_NUMBER", "")
 
 
+def _priority_key(filename):
+    """Priorise les fichiers les plus importants pour la review."""
+    priorities = {
+        "LEARNED.md": 0,
+        "Dockerfile": 1,
+        "runbook.md": 2,
+        "index.html": 3,
+    }
+    return priorities.get(Path(filename).name, 100)
+
+
 def get_pr_files(pr_number):
     """Récupère les fichiers modifiés d'une PR via l'API GitHub."""
     if not REPO or not GITHUB_TOKEN:
@@ -40,7 +51,9 @@ def get_pr_files(pr_number):
     for file in files:
         if file.get("patch") and len(file["patch"]) < 50_000:
             result[file["filename"]] = file["patch"]
-    return result
+
+    # Trier par priorité pour placer les fichiers importants en début de contexte
+    return dict(sorted(result.items(), key=lambda x: _priority_key(x[0])))
 
 
 def get_pr_body(pr_number):
@@ -56,6 +69,28 @@ def get_pr_body(pr_number):
     response = requests.get(url, headers=headers)
     response.raise_for_status()
     return response.json().get("body", "")
+
+
+def get_previous_reviews(pr_number):
+    """Récupère les reviews Lead précédentes sur la PR."""
+    if not REPO or not GITHUB_TOKEN:
+        return ""
+
+    url = f"https://api.github.com/repos/{REPO}/issues/{pr_number}/comments"
+    headers = {
+        "Authorization": f"token {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github+json",
+    }
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+    reviews = []
+    for comment in response.json():
+        body = comment.get("body", "")
+        if "## Review du Lead DevOps" in body:
+            reviews.append(body)
+    if not reviews:
+        return ""
+    return "\n\n---\n\n".join(reviews[-3:])
 
 
 def extract_mission_id(body):
@@ -155,10 +190,11 @@ def main():
 
     mission = Mission.from_dict(json.loads(mission_file.read_text(encoding="utf-8")))
     changed_files = get_pr_files(pr_number)
+    previous_reviews = get_previous_reviews(pr_number)
 
     cache = Cache(Path("data/cache/llm"))
     llm = load_llm_from_env(cache)
-    review = review_mission(llm, mission, changed_files)
+    review = review_mission(llm, mission, changed_files, previous_reviews)
 
     post_review(pr_number, review, review.score)
 
