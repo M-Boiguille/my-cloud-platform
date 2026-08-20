@@ -1,51 +1,39 @@
 {
   "mission_id": "mcp-001",
-  "title": "Couche Kubernetes raw : conteneurisation et déploiement manuel sur k3s",
-  "level": "confirme",
-  "client_brief": "Le client souhaite migrer une application web existante vers Kubernetes. Pour valider l'approche, nous devons démontrer une première itération avec une conteneurisation Docker simple et un déploiement manuel sur un cluster k3s, sans utiliser Helm, Terraform ni CI/CD. Cette phase est essentielle pour comprendre les fondations avant d'introduire les outils d'abstraction.",
-  "description": "Dans cette mission, vous allez mettre en place la couche Kubernetes de façon 'raw' (manuelle) afin de maîtriser chaque brique. Vous devez : 1) conteneuriser une application web de votre choix (par exemple Nginx ou une petite app Python) via un Dockerfile ; 2) installer et configurer un cluster k3s (mono-nœud) sur une machine locale ou une EC2 Free Tier ; 3) rédiger et appliquer des manifestes Kubernetes natifs (Deployment, Service, ConfigMap, Secret, éventuellement PersistentVolume) pour déployer l'application ; 4) vérifier l'accessibilité et le bon fonctionnement ; 5) documenter l'ensemble dans un runbook SRE. Cette mission ne doit pas utiliser Helm, Terraform, Argo CD ou toute autre outillage de la couche suivante : tout est écrit à la main.",
-  "business_impact": "Le client doit être convaincu que l'équipe maîtrise les fondamentaux de Kubernetes. La réussite de cette mission démontre votre capacité à déployer sans dépendre d'outils magiques, ce qui est indispensable pour diagnostiquer des incidents en production et pour auditer les automatisations futures.",
-  "constraints": "Aucune utilisation de Helm, modules Terraform ou pipeline CI/CD. Tous les fichiers doivent être créés manuellement avec un éditeur de texte. Le cluster doit être accessible et reproductible. La sortie doit inclure la documentation des commandes utilisées.",
-  "deadline": "10 jours ouvrés",
+  "title": "Containeriser une application web simple",
+  "level": "debutant",
+  "client_brief": "Notre équipe développe une petite application web de démonstration. Pour faciliter le déploiement et l'intégration continue, nous avons besoin de la containeriser avec Docker. Vous allez créer une image Docker pour cette application statique.",
+  "description": "Dans cette mission, vous allez construire une image Docker pour une application web statique (un simple site de démonstration). Vous rédigerez un Dockerfile, construirez l'image, et l'exécuterez localement pour vérifier son fonctionnement. Cette mission vous permet de découvrir les concepts fondamentaux de Docker : les images, les conteneurs, et les commandes de base.",
+  "business_impact": "La containerisation est une étape clé pour standardiser les environnements de développement et de production. En maîtrisant les bases de Docker, vous serez capable de créer des conteneurs reproductibles pour n'importe quelle application, ce qui accélère les cycles de livraison et réduit les erreurs d'environnement.",
+  "constraints": "Tous les fichiers doivent être écrits manuellement. Vous ne devez pas utiliser docker-compose pour cette mission. Le Dockerfile doit être créé avec des instructions simples et commentées. L'application doit être accessible via le port 8080.",
+  "deadline": "5 jours",
   "new_concepts": [
-    "docker",
-    "kubernetes-overview",
-    "pods",
-    "deployments",
-    "services",
-    "namespaces",
-    "configmaps",
-    "secrets",
-    "persistent-volumes",
-    "kubectl",
-    "cluster-provisioning",
-    "advanced-kubectl"
+    "containers",
+    "dockerfile",
+    "docker-run",
+    "docker-images",
+    "docker-network"
   ],
   "prerequisites": [
     "linux-basics",
-    "bash",
-    "variables",
-    "git-init"
+    "bash"
   ],
   "learning_links": [
     "https://docs.docker.com/get-started/",
-    "https://kubernetes.io/docs/tutorials/kubernetes-basics/",
-    "https://k3s.io/"
+    "https://docs.docker.com/engine/reference/builder/",
+    "https://docs.docker.com/engine/reference/commandline/run/"
   ],
   "acceptance_criteria": [
-    "Créer un Dockerfile fonctionnel pour une application web (Nginx ou équivalent) et construire l'image localement.",
-    "Installer un cluster k3s mono-nœud (sur Linux/EC2) et confirmer que le nœud est Ready avec 'kubectl get nodes'.",
-    "Rédiger au moins un manifeste YAML pour un Deployment avec au moins 2 réplicas, un Service de type NodePort, une ConfigMap et un Secret.",
-    "Tous les manifestes sont appliqués via 'kubectl apply' et les ressources sont visibles dans le namespace par défaut.",
-    "L'application est accessible depuis l'extérieur via le NodePort (curl ou revisite) et le service répond correctement.",
-    "Créer un runbook (documentation) décrivant chaque étape, les commandes exactes, les vérifications et les pièges rencontrés.",
-    "Inclure un script de validation (ex: bash script) qui vérifie l'état du cluster, la présence des pods, le service, et effectue un test HTTP."
+    "Un Dockerfile manuellement écrit qui construit une image à partir d'une base nginx:alpine, avec l'application statique copiée dedans.",
+    "La commande docker build -t my-web-app . fonctionne sans erreur.",
+    "La commande docker run -p 8080:80 my-web-app lance le conteneur et l'application est accessible sur http://localhost:8080.",
+    "Un document (runbook) décrivant les étapes pour construire et exécuter l'image, avec les commandes utilisées.",
+    "La sortie de docker ps et docker images montrent respectivement le conteneur en cours d'exécution et l'image créée."
   ],
-  "estimated_time_minutes": 600,
+  "estimated_time_minutes": 240,
   "deliverables": [
     "Dockerfile",
-    "manifestes/ (deployment.yaml, service.yaml, configmap.yaml, secret.yaml)",
-    "runbook.md",
-    "validation.sh"
+    "index.html",
+    "runbook.md"
   ]
 }
