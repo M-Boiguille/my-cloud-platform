@@ -1,6 +1,6 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
 # Configuration de CodeRabbit pour my-cloud-platform
 language: fr
-tone: constructive
 
 reviews:
   auto_review:
