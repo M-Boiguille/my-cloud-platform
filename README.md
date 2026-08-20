@@ -40,13 +40,17 @@ Le moteur est dans `core/`. Il génère le contexte de mission, ouvre une issue,
 
 Lancer une nouvelle mission : `gh workflow run generate-mission`.
 
-## Review assistée par Qodo
+## Review assistée par CodeRabbit
 
-Le workflow `.github/workflows/qodo-pr-review.yml` est prêt mais inactif par défaut. Il permet d'obtenir un avis technique sur le code d'une PR, en complément du Lead IA pédagogique.
+CodeRabbit est intégré en tant qu'application GitHub pour relire les PRs en complément du Lead IA pédagogique.
+
+### Pourquoi CodeRabbit
+
+- Review technique de code sans configuration YAML dans le repo
+- Chat interactif sur chaque PR
+- Gratuit pour les dépôts publics
+- Reconnu en entreprise
 
 ### Utilisation
 
-- Manuelle : `gh workflow run qodo-pr-review.yml -f run_qodo=true -f pr_number=<N>`
-- Par label : ajoute le label `qodo` à la PR
-
-La configuration du modèle (Deepseek ou autre) sera activée en phase 2/3.
+CodeRabbit déclenche automatiquement une review à l'ouverture et à chaque mise à jour de PR.
