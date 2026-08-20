@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Missions — My Cloud Platform</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <style>
         body {
             margin: 0;
@@ -149,7 +149,7 @@
 
     <script>
         async function loadMissions() {
-            const res = await fetch('missions.json');
+            const res = await fetch('../missions.json');
             if (!res.ok) {
                 document.getElementById('current-mission').innerHTML = '<p class="empty">Impossible de charger les missions.</p>';
                 return;
