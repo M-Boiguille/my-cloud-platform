@@ -6,4 +6,4 @@ echo "==> Ruff"
 ruff check .
 
 echo "==> Mypy"
-mypy core/ career.py
+mypy core/

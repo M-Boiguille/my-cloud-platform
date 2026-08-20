@@ -2,11 +2,23 @@
 
 import json
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
 from .llm import LLMClient
 from .po import Mission
 from .prompts import format_prompt
+
+
+def _read_learned(changed_files: dict[str, str]) -> str:
+    """Extrait le contenu de LEARNED.md s'il est présent."""
+    for path, content in changed_files.items():
+        if Path(path).name.lower() == "learned.md":
+            return f"--- {path} ---\n{content}\n"
+    # Fallback : cherche LEARNED.md sur disque
+    for p in Path(".").rglob("LEARNED.md"):
+        return f"--- {p} ---\n{p.read_text(encoding='utf-8')}\n"
+    return "Aucun fichier LEARNED.md fourni."
 
 
 @dataclass
@@ -59,18 +71,32 @@ def _clean_json(text: str) -> str:
     return text
 
 
-def review_mission(llm: LLMClient, mission: Mission, changed_files: dict[str, str]) -> Review:
+def review_mission(
+    llm: LLMClient,
+    mission: Mission,
+    changed_files: dict[str, str],
+    previous_reviews: str = "",
+) -> Review:
     """Demande au Lead IA une review d'une mission."""
     ticket = json.dumps(mission.to_dict(), ensure_ascii=False, indent=2)
     files = json.dumps(changed_files, ensure_ascii=False, indent=2)
-    prompt = format_prompt("lead", {"TICKET": ticket, "FILES": files})
+    learned = _read_learned(changed_files)
+    prompt = format_prompt(
+        "lead",
+        {
+            "TICKET": ticket,
+            "PREVIOUS_REVIEWS": previous_reviews or "Aucune review précédente.",
+            "LEARNED": learned,
+            "FILES": files,
+        },
+    )
     response = llm.chat(
         messages=[
             {
                 "role": "system",
                 "content": (
                     "Tu es un Lead DevOps Senior. "
-                    "Tu fais des reviews précises et pédagogiques."
+                    "Tu fais des reviews précises, cohérentes et pédagogiques."
                 ),
             },
             {"role": "user", "content": prompt},
