@@ -1,46 +1,51 @@
 {
   "mission_id": "mcp-001",
-  "title": "Implémentation manuelle du pipeline CI/CD de my-cloud-platform",
+  "title": "Couche Kubernetes raw : conteneurisation et déploiement manuel sur k3s",
   "level": "confirme",
-  "client_brief": "Le portfolio my-cloud-platform vise à démontrer la maîtrise du cycle de vie d'une application cloud-native. Chaque couche (Linux, Kubernetes, CI/CD, Infra+Observabilité, Sécurité+GitOps, AIOps) est d'abord implémentée manuellement (raw) puis outillée. Vous avez validé la phase 2 (Kubernetes). Vous attaquez maintenant la phase 3 : CI/CD. Cette mission consiste à créer un premier pipeline de build et de déploiement à la main, sans outil type GitHub Actions, pour comprendre les fondamentaux avant d'introduire des solutions automatisées.",
-  "description": "Vous devez containeriser une application simple (par exemple un serveur HTTP en Node.js ou Python) via un Dockerfile, puis écrire un script shell (pipeline.sh) qui exécute les étapes de CI/CD : vérification du code (lint, tests unitaires éventuels), construction de l'image Docker, et déploiement sur votre cluster Kubernetes (k3s ou EKS) via un manifeste de déploiement mis à jour avec la nouvelle image. Le script doit être robuste (gestion d'erreurs avec set -e, logs clairs) et idempotent (exécutable plusieurs fois sans effet de bord). Vous documenterez la procédure dans un runbook.",
-  "business_impact": "Ceci est la base de votre chaîne de livraison. Une fois fonctionnel, vous pourrez automatiser ces étapes avec des outils comme GitHub Actions ou GitLab CI, puis intégrer Argo CD pour le GitOps. Un pipeline manuel bien compris garantit que vous savez diagnostiquer les pannes et personnaliser les automatisations ultérieures. C'est une compétence attendue dans les équipes SRE/DevOps.",
-  "constraints": "Aucun outil de CI/CD centralisé (GitHub Actions, Jenkins, GitLab CI) ne doit être utilisé. Tout doit être exécuté localement ou sur votre cluster. Le script doit être écrit en bash et s'appuyer sur les commandes standard (docker, kubectl, etc.). Vous devez gérer vous-même les erreurs et les retours de code. L'application choisie doit être minimaliste mais fonctionnelle.",
-  "deadline": "5 jours ouvrés à partir de l'acceptation de la mission.",
+  "client_brief": "Le client souhaite migrer une application web existante vers Kubernetes. Pour valider l'approche, nous devons démontrer une première itération avec une conteneurisation Docker simple et un déploiement manuel sur un cluster k3s, sans utiliser Helm, Terraform ni CI/CD. Cette phase est essentielle pour comprendre les fondations avant d'introduire les outils d'abstraction.",
+  "description": "Dans cette mission, vous allez mettre en place la couche Kubernetes de façon 'raw' (manuelle) afin de maîtriser chaque brique. Vous devez : 1) conteneuriser une application web de votre choix (par exemple Nginx ou une petite app Python) via un Dockerfile ; 2) installer et configurer un cluster k3s (mono-nœud) sur une machine locale ou une EC2 Free Tier ; 3) rédiger et appliquer des manifestes Kubernetes natifs (Deployment, Service, ConfigMap, Secret, éventuellement PersistentVolume) pour déployer l'application ; 4) vérifier l'accessibilité et le bon fonctionnement ; 5) documenter l'ensemble dans un runbook SRE. Cette mission ne doit pas utiliser Helm, Terraform, Argo CD ou toute autre outillage de la couche suivante : tout est écrit à la main.",
+  "business_impact": "Le client doit être convaincu que l'équipe maîtrise les fondamentaux de Kubernetes. La réussite de cette mission démontre votre capacité à déployer sans dépendre d'outils magiques, ce qui est indispensable pour diagnostiquer des incidents en production et pour auditer les automatisations futures.",
+  "constraints": "Aucune utilisation de Helm, modules Terraform ou pipeline CI/CD. Tous les fichiers doivent être créés manuellement avec un éditeur de texte. Le cluster doit être accessible et reproductible. La sortie doit inclure la documentation des commandes utilisées.",
+  "deadline": "10 jours ouvrés",
   "new_concepts": [
-    "continuous-integration",
-    "continuous-delivery",
-    "bash",
-    "set-e",
-    "dockerfile",
-    "exit-codes"
+    "docker",
+    "kubernetes-overview",
+    "pods",
+    "deployments",
+    "services",
+    "namespaces",
+    "configmaps",
+    "secrets",
+    "persistent-volumes",
+    "kubectl",
+    "cluster-provisioning",
+    "advanced-kubectl"
   ],
   "prerequisites": [
-    "deployments",
-    "kubectl",
-    "pods",
-    "services",
-    "package-management"
+    "linux-basics",
+    "bash",
+    "variables",
+    "git-init"
   ],
   "learning_links": [
     "https://docs.docker.com/get-started/",
-    "https://kubernetes.io/docs/reference/kubectl/",
-    "https://www.gnu.org/software/bash/manual/"
+    "https://kubernetes.io/docs/tutorials/kubernetes-basics/",
+    "https://k3s.io/"
   ],
   "acceptance_criteria": [
-    "Le Dockerfile est présent à la racine du projet et construit une image fonctionnelle de l'application.",
-    "Le script pipeline.sh est présent, exécutable, et implémente les étapes de build, test (si applicable) et déploiement.",
-    "Le script utilise set -e pour s'arrêter en cas d'erreur et affiche des messages de progression clairs.",
-    "Un manifeste Kubernetes (deployment.yaml) est fourni et est mis à jour par le script (par exemple en remplaçant le tag de l'image).",
-    "Le script a été exécuté avec succès sur un cluster Kubernetes réel, et la commande kubectl rollout status deployment/<nom> confirme le déploiement.",
-    "Un runbook (RUNBOOK.md) explique la procédure, les prérequis, les commandes à lancer et les erreurs courantes."
+    "Créer un Dockerfile fonctionnel pour une application web (Nginx ou équivalent) et construire l'image localement.",
+    "Installer un cluster k3s mono-nœud (sur Linux/EC2) et confirmer que le nœud est Ready avec 'kubectl get nodes'.",
+    "Rédiger au moins un manifeste YAML pour un Deployment avec au moins 2 réplicas, un Service de type NodePort, une ConfigMap et un Secret.",
+    "Tous les manifestes sont appliqués via 'kubectl apply' et les ressources sont visibles dans le namespace par défaut.",
+    "L'application est accessible depuis l'extérieur via le NodePort (curl ou revisite) et le service répond correctement.",
+    "Créer un runbook (documentation) décrivant chaque étape, les commandes exactes, les vérifications et les pièges rencontrés.",
+    "Inclure un script de validation (ex: bash script) qui vérifie l'état du cluster, la présence des pods, le service, et effectue un test HTTP."
   ],
-  "estimated_time_minutes": 240,
+  "estimated_time_minutes": 600,
   "deliverables": [
     "Dockerfile",
-    "pipeline.sh",
-    "deployment.yaml",
-    "RUNBOOK.md",
-    "test.sh"
+    "manifestes/ (deployment.yaml, service.yaml, configmap.yaml, secret.yaml)",
+    "runbook.md",
+    "validation.sh"
   ]
 }
