@@ -1,6 +1,6 @@
 # My Cloud Platform
 
-Portfolio DevOps / SRE en reconstruction : infrastructure as code, Kubernetes, CI/CD, GitOps, observability et AIOps.
+Portfolio DevOps / SRE en reconstruction vers un profil **polyvalent et employable** : Linux, Docker, AWS, Terraform, CI/CD, Kubernetes, SRE et DevSecOps.
 
 Chaque couche est d'abord implémentée **à la main** (`raw/`), puis versionnée avec l'outillage standard (`tooled/`). Cette méthode prouve que je comprends ce que chaque abstraction automatise.
 
@@ -9,12 +9,14 @@ Chaque couche est d'abord implémentée **à la main** (`raw/`), puis versionné
 Le moteur de missions génère le contexte et les évaluations. Les livrables sont écrits manuellement.
 
 ```
-Phase 1 — Isolation Linux à la main
-Phase 2 — Kubernetes 3-tiers, raw puis Helm
-Phase 3 — CI/CD, raw puis Marketplace
-Phase 4 — Infra Terraform + observabilité instrumentée
-Phase 5 — Sécurité + GitOps
-Phase 6 — AIOps & auto-remédiation
+Phase 1 — Linux et scripting Bash/Python
+Phase 2 — Docker : images, conteneurs, réseaux
+Phase 3 — AWS + Terraform : infrastructure as code
+Phase 4 — CI/CD avec GitHub Actions
+Phase 5 — Kubernetes : k3s/EKS, manifests
+Phase 6 — SRE / Observabilité : Prometheus, Grafana
+Phase 7 — DevSecOps : sécurité, GitOps, cosign
+Phase 8 — Platform Engineering
 ```
 
 ## Structure
