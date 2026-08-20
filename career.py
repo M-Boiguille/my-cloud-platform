@@ -12,19 +12,24 @@ from core.po import generate_mission
 from core.state import load_progress
 
 
-def get_current_mission() -> str | None:
-    """Retourne le dernier mission_id généré.\n\n    Cette fonction est utilisée par la CLI et les workflows.\n    """
-
+def _list_mission_files() -> list[Path]:
+    """Liste les fichiers de mission générés, triés."""
     generated_dir = Path("missions/mcp/generated")
     if not generated_dir.exists():
-        return None
-    files = sorted(generated_dir.glob("mcp-*.json"))
+        return []
+    return sorted(generated_dir.glob("mcp-*.json"))
+
+
+def get_current_mission() -> str | None:
+    """Retourne le dernier mission_id généré."""
+
+    files = _list_mission_files()
     if not files:
         return None
     return files[-1].stem
 
 
-def cmd_start():
+def cmd_start() -> None:
     """Affiche la mission en cours."""
     mission_id = get_current_mission()
     if not mission_id:
@@ -50,7 +55,7 @@ def cmd_start():
         print(f"  {i}. {criterion}")
 
 
-def cmd_status():
+def cmd_status() -> None:
     """Affiche le niveau et l'historique."""
     progress = load_progress()
     print(f"\nProfil : {progress.player.name}")
@@ -62,7 +67,7 @@ def cmd_status():
         print(f"  {skill}: {value}/100")
 
 
-def cmd_regenerate():
+def cmd_regenerate() -> None:
     """Redemande une nouvelle génération de mission."""
     progress = load_progress()
     mission_id = get_current_mission()
@@ -88,7 +93,7 @@ def cmd_regenerate():
     print(f"Titre : {mission.title}")
 
 
-def cmd_submit():
+def cmd_submit() -> None:
     """Crée une branche et ouvre une PR pour la mission en cours."""
     mission_id = get_current_mission()
     if not mission_id:
@@ -112,7 +117,7 @@ def cmd_submit():
     print(f"    --body \"Mission {mission_id}\"")
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="my-cloud-platform")
     parser.add_argument(
         "--start",
