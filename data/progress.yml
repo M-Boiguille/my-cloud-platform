@@ -1,18 +1,29 @@
 player:
   name: autodidact
-  current_level: confirme
+  current_level: debutant
   current_mission: my-cloud-platform
-  target_level: SRE
+  target_level: ingenieur-devops-polyvalent
   certifications:
   - name: LFCS
-    status: obtained
-    date: 2025-XX-XX
+    status: planned
+    date: null
   active_courses:
-  - name: CKA
-    url: https://kodekloud.com/courses/certified-kubernetes-administrator/
-    completed_modules: 13
-    total_modules: 14
+  - name: Shell Scripts for Beginners
+    url: https://kodekloud.com/courses/shell-scripts-for-beginners/
+    completed_modules: 1
+    total_modules: 3
+  - name: Docker for Beginners
+    url: https://kodekloud.com/courses/docker-for-beginners/
+    completed_modules: 0
+    total_modules: 4
 
 completed_missions: []
-validated_concepts: []
+validated_concepts:
+- bash
+- shebang
+- variables
+- linux-basics
+- git-init
+- commit
+- staging-area
 skills_overrides: {}

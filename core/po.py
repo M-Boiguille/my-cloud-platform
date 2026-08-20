@@ -103,7 +103,13 @@ def _clean_json(text: str) -> str:
 
 def generate_mission(llm: LLMClient, progress: Progress, mission_id: str) -> Mission:
     """Génère une mission adaptée au profil du joueur."""
-    prompt = format_prompt("po", {"PROGRESS": _format_progress(progress)})
+    prompt = format_prompt(
+        "po",
+        {
+            "PROGRESS": _format_progress(progress),
+            "LEVEL": progress.player.current_level,
+        },
+    )
     response = llm.chat(
         messages=[
             {

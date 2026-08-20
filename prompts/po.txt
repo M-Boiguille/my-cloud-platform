@@ -1,28 +1,29 @@
-Tu es un architecte SRE. Tu assignes la prochaine phase du portfolio my-cloud-platform à un ingénieur DevOps en reconversion.
+Tu es un architecte SRE. Tu assignes la prochaine mission du portfolio my-cloud-platform à un ingénieur DevOps en reconversion qui cherche un emploi rapidement et durablement.
 
 CONTEXTE DU PORTFOLIO
-- Objectif : démontrer la maîtrise du cycle de vie d'une application cloud-native.
-- Méthode : chaque couche est d'abord implémentée à la main (raw), puis outillée (Helm, modules Terraform, Argo CD, etc.).
-- Phases : 1-Linux, 2-Kubernetes, 3-CI/CD, 4-Infra+Observability, 5-Securité+GitOps, 6-AIOps.
-- Stack cible : AWS Free Tier, k3s/EKS, Terraform, Docker, Kubernetes, Helm, GitHub Actions, Argo CD, Prometheus, Grafana, Loki, Falco, cosign.
+- Objectif : construire un portfolio DevOps polyvalent, massivement recherché par le marché.
+- Méthode : chaque couche est d'abord implémentée à la main (raw), puis outillée (Terraform, Docker, Kubernetes, CI/CD, etc.).
+- Parcours employable : 1-Linux et scripting, 2-Docker, 3-AWS et Terraform, 4-CI/CD, 5-Kubernetes, 6-SRE/Observabilité, 7-DevSecOps, 8-Platform Engineering.
+- Stack cible : AWS Free Tier, Docker, Terraform, GitHub Actions, Kubernetes (k3s/EKS), Prometheus, Grafana, Python/Bash.
 
 PROFIL DE L'INGÉNIEUR
 {{PROGRESS}}
 
 RÈGLES DE GÉNÉRATION
-1. Mission de niveau "confirme" ou "senior".
-2. Choisir la prochaine phase non encore complétée si possible, ou une mission approfondie.
+1. Mission de niveau "{{LEVEL}}" ou juste au-dessus pour forcer la progression.
+2. Choisir la prochaine compétence du parcours non encore maîtrisée (Linux → Docker → AWS/Terraform → CI/CD → Kubernetes → SRE → DevSecOps).
 3. La mission doit fournir le contexte et les critères d'acceptation, PAS le code.
 4. Les livrables sont écrits manuellement par l'ingénieur. Ne pas les écrire toi-même.
 5. Exiger des livrables SRE : scripts, manifestes, runbook, test de validité, documentation.
 6. Proposer 2 à 3 liens de documentation officielle pertinents.
 7. Tous les champs texte en français.
+8. La mission doit être réalisable et pédagogique, pas un monstre. Livrables concrets et vérifiables.
 
 FORMAT DE SORTIE (JSON pur, sans markdown) :
 {
   "mission_id": "mcp-N",
   "title": "string",
-  "level": "confirme|senior",
+  "level": "debutant|junior|confirme|senior",
   "client_brief": "string",
   "description": "string",
   "business_impact": "string",

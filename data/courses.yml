@@ -6,7 +6,7 @@ courses:
     concepts:
     - kubernetes-overview
     - certification-format
-    completed: true
+    completed: false
   - name: Core Concepts
     concepts:
     - pods
@@ -15,7 +15,7 @@ courses:
     - namespaces
     - services
     - kubectl
-    completed: true
+    completed: false
   - name: Scheduling
     concepts:
     - manual-scheduling
@@ -23,12 +23,12 @@ courses:
     - node-affinity
     - daemonsets
     - static-pods
-    completed: true
+    completed: false
   - name: Logging and Monitoring
     concepts:
     - metrics-server
     - application-logs
-    completed: true
+    completed: false
   - name: Application Lifecycle Management
     concepts:
     - rolling-updates
@@ -37,13 +37,13 @@ courses:
     - secrets
     - init-containers
     - multi-container-pods
-    completed: true
+    completed: false
   - name: Cluster Maintenance
     concepts:
     - os-upgrades
     - cluster-upgrade
     - etcd-backup-restore
-    completed: true
+    completed: false
   - name: Security
     concepts:
     - authentication
@@ -54,7 +54,7 @@ courses:
     - image-security
     - security-context
     - network-policies
-    completed: true
+    completed: false
   - name: Storage
     concepts:
     - volumes
@@ -62,7 +62,7 @@ courses:
     - persistent-volume-claims
     - storage-class
     - csi
-    completed: true
+    completed: false
   - name: Networking
     concepts:
     - cni
@@ -70,30 +70,30 @@ courses:
     - service-networking
     - coredns
     - ingress
-    completed: true
+    completed: false
   - name: Design and Install Kubernetes Cluster
     concepts:
     - cluster-design
     - high-availability
     - etcd-ha
-    completed: true
+    completed: false
   - name: Install Kubernetes the kubeadm way
     concepts:
     - kubeadm
     - cluster-provisioning
-    completed: true
+    completed: false
   - name: Troubleshooting
     concepts:
     - application-failure
     - control-plane-failure
     - worker-node-failure
     - network-troubleshooting
-    completed: true
+    completed: false
   - name: Other Topics
     concepts:
     - json-path
     - advanced-kubectl
-    completed: true
+    completed: false
   - name: Mock Exams
     concepts:
     - exam-simulation
@@ -135,7 +135,7 @@ courses:
     - git-init
     - commit
     - staging-area
-    completed: false
+    completed: true
   - name: Branches et fusion
     concepts:
     - branching
@@ -165,7 +165,7 @@ courses:
     - bash
     - shebang
     - variables
-    completed: false
+    completed: true
   - name: Structures de contrôle
     concepts:
     - loops
@@ -389,4 +389,56 @@ courses:
   - name: Dashboards Grafana pour les logs
     concepts:
     - grafana-dashboards
+    completed: false
+- name: Docker for Beginners
+  url: https://kodekloud.com/courses/docker-for-beginners/
+  modules:
+  - name: Containers vs VMs
+    concepts:
+    - containers
+    - virtualization
+    - docker-runtime
+    completed: false
+  - name: Images and Dockerfile
+    concepts:
+    - dockerfile
+    - docker-images
+    - layers
+    - registry
+    completed: false
+  - name: Running Containers
+    concepts:
+    - docker-run
+    - docker-exec
+    - ports
+    - volumes
+    completed: false
+  - name: Networking
+    concepts:
+    - docker-network
+    - bridge
+    - host-networking
+    completed: false
+- name: AWS Cloud Practitioner
+  url: https://kodekloud.com/courses/aws-cloud-practitioner/
+  modules:
+  - name: AWS Core Services
+    concepts:
+    - ec2
+    - s3
+    - vpc
+    - iam
+    - rds
+    completed: false
+  - name: AWS Security
+    concepts:
+    - security-groups
+    - iam-policies
+    - kms
+    completed: false
+  - name: AWS Pricing
+    concepts:
+    - free-tier
+    - pricing-models
+    - billing
     completed: false

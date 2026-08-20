@@ -45,7 +45,7 @@ def _max_issue_number():
         "Authorization": f"token {GITHUB_TOKEN}",
         "Accept": "application/vnd.github+json",
     }
-    params = {"labels": "mission", "state": "all", "per_page": 100}
+    params = {"labels": "mission", "state": "open", "per_page": 100}
     response = requests.get(url, headers=headers, params=params)
     if response.status_code != 200:
         return 0

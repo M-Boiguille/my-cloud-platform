@@ -1,8 +1,8 @@
 {
-  "total_calls": 1,
-  "total_input_tokens": 1524,
-  "total_output_tokens": 3196,
-  "total_tokens": 4720,
+  "total_calls": 3,
+  "total_input_tokens": 4748,
+  "total_output_tokens": 7704,
+  "total_tokens": 12452,
   "calls": [
     {
       "timestamp": "2026-08-19T03:27:25.593373+00:00",
@@ -10,6 +10,20 @@
       "prompt_tokens": 1524,
       "completion_tokens": 3196,
       "total_tokens": 4720
+    },
+    {
+      "timestamp": "2026-08-20T07:21:44.992808+00:00",
+      "model": "deepseek-reasoner",
+      "prompt_tokens": 1543,
+      "completion_tokens": 2502,
+      "total_tokens": 4045
+    },
+    {
+      "timestamp": "2026-08-20T07:23:29.493993+00:00",
+      "model": "deepseek-reasoner",
+      "prompt_tokens": 1681,
+      "completion_tokens": 2006,
+      "total_tokens": 3687
     }
   ]
 }
