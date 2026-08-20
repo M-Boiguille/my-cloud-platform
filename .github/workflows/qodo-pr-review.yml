@@ -1,0 +1,45 @@
+name: Qodo PR review
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_qodo:
+        description: "Lancer Qodo PR Agent"
+        required: true
+        default: false
+        type: boolean
+      pr_number:
+        description: "Numéro de la PR à relire"
+        required: true
+        type: string
+
+  pull_request:
+    types: [labeled]
+
+permissions:
+  pull-requests: write
+  issues: write
+  contents: read
+
+jobs:
+  qodo:
+    if: |
+      (github.event_name == 'workflow_dispatch' && inputs.run_qodo) ||
+      (github.event_name == 'pull_request' && github.event.label.name == 'qodo')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Qodo PR Agent
+        uses: qodo-ai/pr-agent@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.inputs.pr_number || github.event.pull_request.number }}
+          # Deepseek configuration (à activer en phase 2/3)
+          # CONFIG.MODEL: "deepseek/deepseek-chat"
+          # CONFIG.MODEL_TURBO: "deepseek/deepseek-chat"
+          # DEEPSEEK.API_BASE: "https://api.deepseek.com/v1"
+          # DEEPSEEK.KEY: ${{ secrets.DEEPSEEK_API_KEY }}

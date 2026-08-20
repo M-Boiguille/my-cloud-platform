@@ -39,3 +39,14 @@ Phase 6 — AIOps & auto-remédiation
 Le moteur est dans `core/`. Il génère le contexte de mission, ouvre une issue, relit la PR et évalue la progression.
 
 Lancer une nouvelle mission : `gh workflow run generate-mission`.
+
+## Review assistée par Qodo
+
+Le workflow `.github/workflows/qodo-pr-review.yml` est prêt mais inactif par défaut. Il permet d'obtenir un avis technique sur le code d'une PR, en complément du Lead IA pédagogique.
+
+### Utilisation
+
+- Manuelle : `gh workflow run qodo-pr-review.yml -f run_qodo=true -f pr_number=<N>`
+- Par label : ajoute le label `qodo` à la PR
+
+La configuration du modèle (Deepseek ou autre) sera activée en phase 2/3.
