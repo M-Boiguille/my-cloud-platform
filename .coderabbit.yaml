@@ -1,0 +1,24 @@
+# Configuration de CodeRabbit pour my-cloud-platform
+language: fr
+tone: constructive
+
+reviews:
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+  poem: false
+  collapse_walkthrough: true
+  path_filters:
+    - "!data/**"
+    - "!web/metrics.json"
+    - "!web/missions.json"
+    - "!missions/**"
+    - "!README.md"
+    - "!docs/**"
+
+  auto_reply:
+    enabled: true
+
+  profile: chill
+
+  review_status: true
