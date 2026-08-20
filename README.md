@@ -42,6 +42,8 @@ Lancer une nouvelle mission : `gh workflow run generate-mission`.
 
 ## Review assistée par CodeRabbit
 
+[![CodeRabbit](https://img.shields.io/badge/CodeRabbit-PR%20Review-FF6F61?logo=github)](https://github.com/M-Boiguille/my-cloud-platform/pulls)
+
 CodeRabbit est intégré en tant qu'application GitHub pour relire les PRs en complément du Lead IA pédagogique.
 
 ### Pourquoi CodeRabbit
