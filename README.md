@@ -42,6 +42,10 @@ Le moteur est dans `core/`. Il génère le contexte de mission, ouvre une issue,
 
 Lancer une nouvelle mission : `gh workflow run generate-mission`.
 
+## Conventions
+
+Les règles de nommage des branches et des commits sont dans [docs/CONVENTIONS.md](docs/CONVENTIONS.md).
+
 ## Review assistée par CodeRabbit
 
 [![CodeRabbit](https://img.shields.io/badge/CodeRabbit-PR%20Review-FF6F61?logo=github)](https://github.com/M-Boiguille/my-cloud-platform/pulls)
