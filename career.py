@@ -13,7 +13,8 @@ from core.state import load_progress
 
 
 def get_current_mission() -> str | None:
-    """Retourne le dernier mission_id généré."""
+    """Retourne le dernier mission_id généré.\n\n    Cette fonction est utilisée par la CLI et les workflows.\n    """
+
     generated_dir = Path("missions/mcp/generated")
     if not generated_dir.exists():
         return None
