@@ -1,20 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    type: web-app
   name: my-web-deploy
+  labels:
+    app: my-web-deploy
 spec:
   replicas: 3
   selector:
     matchLabels:
-      type: web-app
+      app: my-web-deploy
   template:
     metadata:
       labels:
-        type: web-app
-      name: my-web-pod
+        app: my-web-deploy
     spec:
       containers:
         - image: my-web-app:1.0
           name: my-web-app-container
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1

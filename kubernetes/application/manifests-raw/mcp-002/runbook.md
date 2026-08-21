@@ -13,7 +13,7 @@ Lors d'une mise à jour de version (*RollingUpdate*) déclenchée par `kubectl a
 
 ## Diagnostic
 
-1. **Causes du statut `Error` :** Lorsque Kubernetes ferme un pod (phase `Terminating`), il lui envoie un signal `SIGTERM`. L'application `traefik/whoami` intercepte ce signal et s'arrête en renvoyant un code de sortie d'erreur (`Exit Code 1` au lieu de `0`).
+1. **Causes du statut `Error` :** Lorsque Kubernetes ferme un pod (phase `Terminating`), il lui envoie un signal `SIGTERM`. L'application `my-web-app:1.0` intercepte ce signal et s'arrête en renvoyant un code de sortie d'erreur (`Exit Code 1` au lieu de `0`).
 2. **Disparition rapide du Pod :** Le Deployment a déjà instancié avec succès les nouveaux pods (`1/1 Running`). Le Garbage Collector de Kubernetes supprime immédiatement les anciens pods terminés dès que la rotation est validée, rendant les pods `NotFound`.
 3. **Impact applicatif :** Réellement nul. L'application est restée 100% disponible sur `http://localhost:8080` sans aucune interruption de service.
 

@@ -1,10 +1,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  labels:
-    type: web-app
   name: my-web-pod
+  labels:
+    app: my-web-pod
 spec:
   containers:
     - image: my-web-app:1.0
       name: my-web-app-container
+      ports:
+        - containerPort: 80
