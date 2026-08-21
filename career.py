@@ -144,7 +144,7 @@ def cmd_status() -> None:
         print(f"  {skill}: {value}/100")
 
 
-def cmd_regenerate() -> None:
+def cmd_regenerate(level: str | None = None) -> None:
     """Redemande une nouvelle génération de mission."""
     progress = load_progress()
     mission_id = get_current_mission()
@@ -157,20 +157,21 @@ def cmd_regenerate() -> None:
     cache = Cache(Path("data/cache/llm"))
     llm = load_llm_from_env(cache)
     new_id = f"{mission_id or 'mcp-001'}-regen"
-    mission = generate_mission(llm, progress, new_id)
+    mission = generate_mission(llm, progress, new_id, level=level)
     out_file = _save_mission(mission)
     print(f"Nouvelle mission générée : {out_file}")
     print(f"Titre : {mission.title}")
+    print(f"Niveau : {mission.level}")
 
 
-def cmd_custom(topic: str) -> None:
+def cmd_custom(topic: str, level: str | None = None) -> None:
     """Génère une mission personnalisée sur un sujet donné."""
     progress = load_progress()
     mission_id = _find_next_mission_id()
 
     cache = Cache(Path("data/cache/llm"))
     llm = load_llm_from_env(cache)
-    mission = generate_custom_mission(llm, progress, mission_id, topic)
+    mission = generate_custom_mission(llm, progress, mission_id, topic, level=level)
     out_file = _save_mission(mission)
 
     print(f"Mission custom générée : {out_file}")
@@ -239,6 +240,12 @@ def main() -> None:
         metavar="TOPIC",
         help="Génère une mission personnalisée sur le sujet donné",
     )
+    parser.add_argument(
+        "--level",
+        metavar="NIVEAU",
+        choices=["debutant", "junior", "confirme", "senior"],
+        help="Force le niveau de la mission (débutant, junior, confirme, senior)",
+    )
 
     args = parser.parse_args()
 
@@ -247,11 +254,11 @@ def main() -> None:
     elif args.status:
         cmd_status()
     elif args.regenerate:
-        cmd_regenerate()
+        cmd_regenerate(level=args.level)
     elif args.submit:
         cmd_submit()
     elif args.custom_mission:
-        cmd_custom(args.custom_mission)
+        cmd_custom(args.custom_mission, level=args.level)
     else:
         parser.print_help()
 

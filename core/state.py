@@ -1,5 +1,6 @@
 """Gestion du state joueur en YAML."""
 
+import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -116,3 +117,13 @@ def save_career(state: dict[str, Any], path: Path = CAREER_FILE) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8") as f:
         yaml.safe_dump(state, f, sort_keys=False, allow_unicode=True)
+
+
+def load_last_eval() -> dict[str, Any]:
+    """Charge la dernière évaluation de mission."""
+    state_dir = Path("data/state")
+    files = sorted(state_dir.glob("eval-mcp-*.json"))
+    if not files:
+        return {}
+    data: dict[str, Any] = json.loads(files[-1].read_text(encoding="utf-8"))
+    return data

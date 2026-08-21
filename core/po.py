@@ -6,7 +6,36 @@ from typing import Any
 
 from .llm import LLMClient
 from .prompts import format_prompt
-from .state import Progress
+from .state import Progress, load_last_eval
+
+LEVELS = ["debutant", "junior", "confirme", "senior"]
+
+
+def _level_index(level: str) -> int:
+    return LEVELS.index(level) if level in LEVELS else 1
+
+
+def suggest_level(progress: Progress, last_score: int | None = None) -> str:
+    """Suggère le niveau de la prochaine mission.
+
+    Règles :
+    - Score >= 90 : monter d'un cran
+    - Score 70-89 : rester au niveau actuel
+    - Score < 70 ou absent : descendre d'un cran ou rester débutant
+    """
+    current_idx = _level_index(progress.player.current_level)
+
+    if last_score is None:
+        last_eval = load_last_eval()
+        last_score = last_eval.get("score") if last_eval else None
+
+    if last_score is None:
+        return LEVELS[current_idx]
+    if last_score >= 90:
+        return LEVELS[min(current_idx + 1, len(LEVELS) - 1)]
+    if last_score >= 70:
+        return LEVELS[current_idx]
+    return LEVELS[max(current_idx - 1, 0)]
 
 
 @dataclass
@@ -64,8 +93,10 @@ class Mission:
         )
 
 
-def _format_progress(progress: Progress) -> str:
+def _format_progress(progress: Progress, level: str | None = None) -> str:
     lines = [f"Niveau actuel : {progress.player.current_level}"]
+    lines.append(f"Niveau demandé pour cette mission : {level or 'auto'}")
+    lines.append(f"Niveau suggéré : {suggest_level(progress)}")
     lines.append("Compétences :")
     for skill, value in sorted(progress.skills.items()):
         lines.append(f"- {skill}: {value}/100")
@@ -235,13 +266,23 @@ def _generate_raw(llm: LLMClient, prompt: str) -> dict[str, Any]:
     return data
 
 
-def generate_mission(llm: LLMClient, progress: Progress, mission_id: str) -> Mission:
+def _resolve_level(progress: Progress, level: str | None = None) -> str:
+    """Détermine le niveau effectif d'une mission."""
+    if level in LEVELS:
+        return level
+    return suggest_level(progress)
+
+
+def generate_mission(
+    llm: LLMClient, progress: Progress, mission_id: str, level: str | None = None
+) -> Mission:
     """Génère une mission adaptée au profil du joueur, avec validation et retry."""
+    effective_level = _resolve_level(progress, level)
     prompt = format_prompt(
         "po",
         {
-            "PROGRESS": _format_progress(progress),
-            "LEVEL": progress.player.current_level,
+            "PROGRESS": _format_progress(progress, level=effective_level),
+            "LEVEL": effective_level,
         },
     )
     data = _generate_raw(llm, prompt)
@@ -265,15 +306,20 @@ def generate_mission(llm: LLMClient, progress: Progress, mission_id: str) -> Mis
 
 
 def generate_custom_mission(
-    llm: LLMClient, progress: Progress, mission_id: str, topic: str
+    llm: LLMClient,
+    progress: Progress,
+    mission_id: str,
+    topic: str,
+    level: str | None = None,
 ) -> Mission:
     """Génère une mission sur un sujet personnalisé."""
+    effective_level = _resolve_level(progress, level)
     prompt = format_prompt(
         "po_custom",
         {
             "TOPIC": topic,
-            "PROGRESS": _format_progress(progress),
-            "LEVEL": progress.player.current_level,
+            "PROGRESS": _format_progress(progress, level=effective_level),
+            "LEVEL": effective_level,
         },
     )
     data = _generate_raw(llm, prompt)
