@@ -1,0 +1,57 @@
+{
+  "mission_id": "mcp-003",
+  "title": "Déploiement d'infrastructure AWS avec Terraform",
+  "level": "confirme",
+  "client_brief": "Une startup souhaite industrialiser le déploiement de son application web. Elle utilise encore les consoles AWS et veut migrer vers une approche Infrastructure as Code. Vous devez créer un socle Terraform pour déployer un serveur web simple dans le Free Tier.",
+  "description": "Vous allez écrire des fichiers Terraform (main.tf, variables.tf, outputs.tf) pour créer une instance EC2 dans le VPC par défaut avec un groupe de sécurité qui autorise le trafic HTTP entrant. L'instance exécutera un serveur web (nginx) grâce à un script user_data. Vous utiliserez Terraform pour planifier et appliquer la configuration, puis testerez l'accès HTTP. Enfin, vous documenterez le tout dans un runbook et un README.",
+  "business_impact": "Permettre à l'équipe de provisionner automatiquement l'infrastructure de staging en quelques minutes, réduire les erreurs manuelles, et préparer le terrain pour une adoption plus large de Terraform dans l'entreprise.",
+  "constraints": "Toutes les ressources doivent être éligibles au AWS Free Tier (t2.micro ou t3.micro, us-east-1). Aucun code serveur à écrire : utilisez un package nginx via user_data. La configuration doit être versionnée dans un dépôt git local. Les fichiers secrets (comme les clés AWS) ne doivent pas être inclus dans les fichiers Terraform. Documentez les éventuelles pratiques avancées (backend distant, verrouillage d'état, moindre privilège) dans LEARNED.md sans les rendre bloquantes.",
+  "deadline": "Sous 2 jours ouvrés",
+  "new_concepts": [
+    "terraform",
+    "infrastructure-as-code",
+    "providers",
+    "resources",
+    "data-sources",
+    "security-groups",
+    "ec2",
+    "user-data",
+    "state-file",
+    "plan",
+    "apply",
+    "destroy",
+    "variables",
+    "outputs"
+  ],
+  "prerequisites": [
+    "linux-basics",
+    "bash",
+    "shebang",
+    "git-init",
+    "staging-area"
+  ],
+  "learning_links": [
+    "https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli",
+    "https://registry.terraform.io/providers/hashicorp/aws/latest/docs",
+    "https://developer.hashicorp.com/terraform/language/settings/backends/remote"
+  ],
+  "acceptance_criteria": [
+    "Les commandes `terraform init` et `terraform validate` s'exécutent sans erreur.",
+    "Le fichier main.tf définit un provider AWS avec la région us-east-1, un groupe de sécurité autorisant le port 80 depuis 0.0.0.0/0, et une instance EC2 avec le type t2.micro (ou t3.micro).",
+    "L'AMI est récupérée dynamiquement via un data-source aws_ami pour Amazon Linux 2.",
+    "Le script user_data installe nginx et crée une page par défaut contenant le message 'Hello Terraform'.",
+    "Après `terraform apply`, la commande `curl http://$(terraform output -raw instance_public_ip)` répond avec le code HTTP 200 et le message 'Hello Terraform'.",
+    "Le script validate.sh exécute ce test curl et retourne un code de sortie 0 en cas de succès.",
+    "Le README.md décrit l'architecture et la configuration, et le RUNBOOK.md explique les étapes pour déployer, tester et détruire l'infrastructure."
+  ],
+  "estimated_time_minutes": 180,
+  "deliverables": [
+    "main.tf",
+    "variables.tf",
+    "outputs.tf",
+    "validate.sh",
+    "README.md",
+    "RUNBOOK.md",
+    "LEARNED.md"
+  ]
+}
