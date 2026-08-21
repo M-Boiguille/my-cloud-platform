@@ -1,4 +1,4 @@
-# Conventions Git
+# Git Workflow
 
 Ce document fixe les règles de nommage des branches et des commits pour maintenir un historique clair et traçable.
 

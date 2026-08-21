@@ -32,7 +32,7 @@ Le moteur dans `core/` génère le contexte de chaque mission, ouvre l'issue ass
 
 ## Démarrer
 
-- [Documentation d'onboarding](docs/ONBOARDING.md)
+- [Onboarding](docs/ONBOARDING.md)
 - [Workflow Git](docs/GIT_WORKFLOW.md)
 - [Workflows GitHub Actions](docs/WORKFLOWS.md)
 

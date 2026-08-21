@@ -8,7 +8,7 @@ Ce fichier liste tous les workflows automatisés du projet et explique leur rôl
 
 - **Déclencheur** : manuel (`workflow_dispatch`)
 - **Rôle** : Génère la prochaine mission avec le PO IA
-- **Quand l'utiliser** : Quand tu as besoin d'une nouvelle mission automatique
+- **Déclenchement** : Lancer manuellement quand une nouvelle mission automatique est nécessaire
 
 ```bash
 gh workflow run generate-mission
@@ -18,31 +18,31 @@ gh workflow run generate-mission
 
 - **Déclencheur** : `pull_request` sur une branche `mission/mcp-*`
 - **Rôle** : Relit la PR avec le Lead IA pédagogique
-- **Quand l'utiliser** : Automatique à l'ouverture/mise à jour d'une PR de mission
+- **Déclenchement** : Automatique à l'ouverture/mise à jour d'une PR de mission
 
 ### `complete-mission.yml`
 
 - **Déclencheur** : `pull_request` fermée et mergée sur une branche `mission/mcp-*`
 - **Rôle** : Évalue la mission, met à jour `data/progress.yml`, génère la mission suivante
-- **Quand l'utiliser** : Automatique après merge
+- **Déclenchement** : Automatique après merge
 
 ### `commitlint.yml`
 
 - **Déclencheur** : `push`, `pull_request`
 - **Rôle** : Vérifie que les messages de commit respectent Conventional Commits
-- **Quand l'utiliser** : À chaque push
+- **Déclenchement** : À chaque push
 
 ### `update-dashboard.yml`
 
 - **Déclencheur** : `push` sur `main`
 - **Rôle** : Met à jour `web/metrics.json` et `web/missions.json`
-- **Quand l'utiliser** : Automatique
+- **Déclenchement** : Automatique
 
 ### `pages.yml`
 
 - **Déclencheur** : push modifiant `web/**` ou `data/**`, `workflow_dispatch`
 - **Rôle** : Déploie le site sur GitHub Pages
-- **Quand l'utiliser** : Automatique
+- **Déclenchement** : Automatique
 
 ## Review externe
 
