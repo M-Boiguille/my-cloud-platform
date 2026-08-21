@@ -1,0 +1,45 @@
+{
+  "mission_id": "mcp-002",
+  "title": "Dockeriser une application web statique avec un serveur NGINX",
+  "level": "debutant",
+  "client_brief": "Bonjour, nous avons besoin d'une solution simple pour héberger notre page d'accueil statique dans un conteneur Docker. Nous souhaitons que le déploiement soit reproductible et que nous puissions tester que la page est bien servie. Actuellement, nous utilisons Git pour le versioning et nous voudrions intégrer cette application à notre workflow.",
+  "description": "L'ingénieur DevOps doit créer une application web statique (une page HTML) puis la dockeriser à l'aide d'un Dockerfile. Il devra écrire un script shell automatisant le build et le lancement du conteneur, ainsi qu'un script de test validant le bon fonctionnement. L'ensemble devra être versionné dans un dépôt Git (initialisation, commit, log). Un petit runbook expliquera les commandes clés pour manipuler le conteneur.",
+  "business_impact": "Cette mission démontre la capacité à conteneuriser une application simple, compétence fondamentale en DevOps. Elle permet de rendre le déploiement portable et reproductible, accélérant la mise en production et facilitant la collaboration entre équipes.",
+  "constraints": "Utiliser exclusivement le plan gratuit AWS (Free Tier) pour l'éventuel déploiement cloud, mais la mission se fait en local. Le port hôte 8080 sera utilisé pour éviter tout conflit. Toutes les commandes doivent fonctionner sur une distribution Linux (Debian/Ubuntu). Le conteneur doit être exécuté en arrière-plan et être accessible via http://localhost:8080.",
+  "deadline": "1 semaine maximum",
+  "new_concepts": [
+    "docker-exec",
+    "docker-network",
+    "volumes"
+  ],
+  "prerequisites": [
+    "dockerfile",
+    "docker-run",
+    "docker-images",
+    "git-init",
+    "commit",
+    "linux-basics",
+    "bash"
+  ],
+  "learning_links": [
+    "https://docs.docker.com/engine/reference/builder/",
+    "https://docs.docker.com/engine/reference/run/",
+    "https://docs.docker.com/engine/reference/commandline/exec/"
+  ],
+  "acceptance_criteria": [
+    "Le dépôt Git local contient les fichiers : index.html, Dockerfile, deploy.sh, test.sh, runbook.md, et l'historique des commits est propre.",
+    "Le Dockerfile utilise l'image officielle `nginx:alpine`, copie `index.html` dans `/usr/share/nginx/html/` et expose le port 80 du conteneur.",
+    "Le script `deploy.sh` construit l'image avec le tag `my-cloud-platform:latest` et lance un conteneur nommé `my-web` en mappant le port hôte 8080 vers le port conteneur 80, avec le réseau par défaut.",
+    "Le script `test.sh` vérifie que l'application répond via `curl -f http://localhost:8080` ou un équivalent, et renvoie un code de sortie 0 en cas de succès.",
+    "Le runbook.md documente les commandes pour construire, lancer, arrêter, redémarrer et supprimer le conteneur (y compris `docker exec` pour vérifier les fichiers à l'intérieur du conteneur).",
+    "Le conteneur est accessible depuis le navigateur à http://localhost:8080 et affiche la page HTML personnalisée."
+  ],
+  "estimated_time_minutes": 120,
+  "deliverables": [
+    "index.html (contenu personnalisé)",
+    "Dockerfile",
+    "deploy.sh",
+    "test.sh",
+    "runbook.md"
+  ]
+}
