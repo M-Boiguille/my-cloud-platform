@@ -45,6 +45,22 @@ python career.py --status
 python career.py --custom-mission "Kubernetes pods, deployments, replicasets"
 ```
 
+Forcer le niveau :
+
+```bash
+python career.py --custom-mission "Kubernetes pods" --level junior
+```
+
+Niveaux possibles : `debutant`, `junior`, `confirme`, `senior`.
+
+Si `--level` n'est pas précisé, le moteur ajuste automatiquement la difficulté en fonction du score de la dernière mission :
+
+| Score | Ajustement |
+|-------|------------|
+| ≥ 90 | Monte d'un niveau |
+| 70-89 | Reste au niveau actuel |
+| < 70 | Descend d'un niveau |
+
 ### Soumettre une mission
 
 ```bash
