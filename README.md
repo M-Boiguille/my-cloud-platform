@@ -42,9 +42,15 @@ Le moteur est dans `core/`. Il génère le contexte de mission, ouvre une issue,
 
 Lancer une nouvelle mission : `gh workflow run generate-mission`.
 
-## Conventions
+## Démarrer
 
-Les règles de nommage des branches et des commits sont dans [docs/CONVENTIONS.md](docs/CONVENTIONS.md).
+Si tu es débutant autodidacte, commence par le [Guide du débutant autodidacte](docs/ONBOARDING.md).
+
+## Conventions et workflow
+
+- [Guide du débutant autodidacte](docs/ONBOARDING.md)
+- [Workflow Git](docs/GIT_WORKFLOW.md)
+- [Workflows GitHub Actions](docs/WORKFLOWS.md)
 
 ## Review assistée par CodeRabbit
 
