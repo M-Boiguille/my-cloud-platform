@@ -1,7 +1,7 @@
 player:
   name: autodidact
-  current_level: debutant
-  current_mission: my-cloud-platform
+  current_level: junior
+  current_mission: mcp-002
   target_level: ingenieur-devops-polyvalent
   certifications:
   - name: LFCS
@@ -16,13 +16,20 @@ player:
     url: https://kodekloud.com/courses/shell-scripts-for-beginners/
     completed_modules: 1
     total_modules: 3
+  - name: Kubernetes for Beginners
+    url: https://kodekloud.com/courses/kubernetes-for-beginners/
+    completed_modules: 0
+    total_modules: 4
+
 completed_missions:
 - mcp-001
 validated_concepts:
 - bash
 - commit
 - containers
+- docker-exec
 - docker-images
+- docker-network
 - docker-run
 - dockerfile
 - git-init
@@ -30,10 +37,11 @@ validated_concepts:
 - shebang
 - staging-area
 - variables
+- volumes
 skills_overrides:
   Linux_Reseau: 35
-  Docker: 40
-  Kubernetes: 0
+  Docker: 80
+  Kubernetes: 5
   CI_CD: 0
   Terraform: 0
   Observabilite_Securite: 0
