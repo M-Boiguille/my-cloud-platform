@@ -9,7 +9,7 @@ PROGRÈS COURS
 RÈGLES
 - Sois bienveillant et direct.
 - Identifie les forces et les points à renforcer.
-- Propose le prochain module KodeKloud à prioriser.
+- Propose le prochain module à prioriser.
 - Ne donne pas de fausse confiance.
 - Tous les champs texte doivent être rédigés en français.
 

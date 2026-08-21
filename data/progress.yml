@@ -9,15 +9,15 @@ player:
     date: null
   active_courses:
   - name: Git
-    url: https://kodekloud.com/courses/git-for-beginners/
+    url: https://git-scm.com/doc
     completed_modules: 1
     total_modules: 4
   - name: Shell Scripts for Beginners
-    url: https://kodekloud.com/courses/shell-scripts-for-beginners/
+    url: https://www.gnu.org/software/bash/manual/bash.html
     completed_modules: 1
     total_modules: 3
   - name: Kubernetes for Beginners
-    url: https://kodekloud.com/courses/kubernetes-for-beginners/
+    url: https://kubernetes.io/docs/home/
     completed_modules: 0
     total_modules: 4
 

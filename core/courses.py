@@ -1,4 +1,4 @@
-"""Gestion des cours KodeKloud et calcul des concepts connus/à venir."""
+"""Gestion des cours et calcul des concepts connus/à venir."""
 
 from dataclasses import dataclass, field
 from pathlib import Path

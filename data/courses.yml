@@ -1,6 +1,6 @@
 courses:
 - name: CKA
-  url: https://kodekloud.com/courses/certified-kubernetes-administrator/
+  url: https://kubernetes.io/docs/home/
   modules:
   - name: Introduction
     concepts:
@@ -100,7 +100,7 @@ courses:
     - timed-practice
     completed: false
 - name: Kubernetes Networking
-  url: https://kodekloud.com/courses/kubernetes-networking/
+  url: https://kubernetes.io/docs/concepts/services-networking/
   modules:
   - name: Fondamentaux réseau
     concepts:
@@ -128,7 +128,7 @@ courses:
     - service-discovery
     completed: false
 - name: Git
-  url: https://kodekloud.com/courses/git-for-beginners/
+  url: https://git-scm.com/doc
   modules:
   - name: Bases de Git
     concepts:
@@ -158,7 +158,7 @@ courses:
     - code-review
     completed: false
 - name: Shell Scripts for Beginners
-  url: https://kodekloud.com/courses/shell-scripts-for-beginners/
+  url: https://www.gnu.org/software/bash/manual/bash.html
   modules:
   - name: Bases du scripting shell
     concepts:
@@ -178,7 +178,7 @@ courses:
     - positional-parameters
     completed: false
 - name: Advanced Bash Scripting
-  url: https://kodekloud.com/courses/advanced-bash-scripting/
+  url: https://www.gnu.org/software/bash/manual/bash.html
   modules:
   - name: Techniques bash avancées
     concepts:
@@ -205,7 +205,7 @@ courses:
     - automation-patterns
     completed: false
 - name: Terraform Associate Certification
-  url: https://kodekloud.com/courses/terraform-for-beginners/
+  url: https://developer.hashicorp.com/terraform/docs
   modules:
   - name: Fondamentaux IaC
     concepts:
@@ -240,7 +240,7 @@ courses:
     - remote-execution
     completed: false
 - name: GitHub Actions
-  url: https://kodekloud.com/courses/github-actions/
+  url: https://docs.github.com/en/actions
   modules:
   - name: Bases des workflows
     concepts:
@@ -267,7 +267,7 @@ courses:
     - marketplace
     completed: false
 - name: AWS Cloud Practitioner
-  url: https://kodekloud.com/courses/aws-cloud-practitioner/
+  url: https://docs.aws.amazon.com/
   modules:
   - name: Concepts Cloud
     concepts:
@@ -295,7 +295,7 @@ courses:
     - support-plans
     completed: false
 - name: Ansible Basics
-  url: https://kodekloud.com/courses/ansible-basics/
+  url: https://docs.ansible.com/
   modules:
   - name: Fondamentaux Ansible
     concepts:
@@ -321,7 +321,7 @@ courses:
     - variables
     completed: false
 - name: Fundamentals of DevOps
-  url: https://kodekloud.com/courses/devops-fundamentals/
+  url: https://kubernetes.io/docs/home/
   modules:
   - name: Culture DevOps
     concepts:
@@ -345,7 +345,7 @@ courses:
     - feedback-loops
     completed: false
 - name: Prometheus Certified Associate
-  url: https://kodekloud.com/courses/prometheus-certified-associate/
+  url: https://prometheus.io/docs/
   modules:
   - name: Architecture Prometheus
     concepts:
@@ -369,7 +369,7 @@ courses:
     - service-discovery
     completed: false
 - name: Grafana Loki
-  url: https://kodekloud.com/courses/grafana-loki/
+  url: https://grafana.com/docs/loki/latest/
   modules:
   - name: Architecture Loki
     concepts:
@@ -391,7 +391,7 @@ courses:
     - grafana-dashboards
     completed: false
 - name: Docker for Beginners
-  url: https://kodekloud.com/courses/docker-for-beginners/
+  url: https://docs.docker.com/
   modules:
   - name: Containers vs VMs
     concepts:
@@ -420,7 +420,7 @@ courses:
     - host-networking
     completed: false
 - name: AWS Cloud Practitioner
-  url: https://kodekloud.com/courses/aws-cloud-practitioner/
+  url: https://docs.aws.amazon.com/
   modules:
   - name: AWS Core Services
     concepts:

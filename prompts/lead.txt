@@ -23,8 +23,8 @@ RÈGLES ABSOLUES
 - Le score final = moyenne arrondie à l'entier inférieur, multipliée par 100.
 - Règle de décision : APPROUVÉ si score >= 80, sinon À_REVOIR.
 - Mentionne explicitement ce qui est bon, ce qui est à corriger.
-- Si un concept KodeKloud est mal appliqué, explique pourquoi.
-- Exige un fichier `LEARNED.md` dans chaque livrable expliquant le choix des solutions et les liens KodeKloud/docs utilisés.
+- Si un concept est mal appliqué, explique pourquoi.
+- Exige un fichier `LEARNED.md` dans chaque livrable expliquant le choix des solutions et les liens docs utilisés.
 - Aucun secret ne doit être versionné en clair ou en base64.
 - Tous les champs texte doivent être rédigés en français.
 - Si tu constates une contradiction avec une review précédente, explique la correction sans revenir sur des points déjà validés.

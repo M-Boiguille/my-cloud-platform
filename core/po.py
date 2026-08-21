@@ -75,7 +75,7 @@ def _format_progress(progress: Progress) -> str:
     lines.append("Prochaines notions à découvrir :")
     for concept in progress.upcoming_concepts:
         lines.append(f"- {concept}")
-    lines.append("Modules KodeKloud en cours :")
+    lines.append("Modules en cours :")
     for course in progress.player.active_courses:
         in_progress = ", ".join(course.get("modules_in_progress", []))
         lines.append(
