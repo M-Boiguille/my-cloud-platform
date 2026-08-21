@@ -262,3 +262,35 @@ def generate_mission(llm: LLMClient, progress: Progress, mission_id: str) -> Mis
         )
 
     return Mission.from_dict(data)
+
+
+def generate_custom_mission(
+    llm: LLMClient, progress: Progress, mission_id: str, topic: str
+) -> Mission:
+    """Génère une mission sur un sujet personnalisé."""
+    prompt = format_prompt(
+        "po_custom",
+        {
+            "TOPIC": topic,
+            "PROGRESS": _format_progress(progress),
+            "LEVEL": progress.player.current_level,
+        },
+    )
+    data = _generate_raw(llm, prompt)
+    data["mission_id"] = mission_id
+
+    for _ in range(3):
+        errors = _validate_mission(data)
+        if not errors:
+            break
+        print("Mission invalide, tentative de correction :", errors)
+        fix_prompt = _fix_prompt(mission_id, data, errors)
+        data = _generate_raw(llm, fix_prompt)
+        data["mission_id"] = mission_id
+    else:
+        raise ValueError(
+            "Impossible de générer une mission valide après 3 tentatives : "
+            + ", ".join(errors)
+        )
+
+    return Mission.from_dict(data)
