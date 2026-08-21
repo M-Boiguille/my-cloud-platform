@@ -1,0 +1,25 @@
+{
+  "date": "2025-04-10",
+  "mission": "Containeriser une application web simple",
+  "score": 100,
+  "concepts_valides": [
+    "containers",
+    "dockerfile",
+    "docker-run",
+    "docker-images"
+  ],
+  "concepts_a_revoir": [
+    "docker-network"
+  ],
+  "skills_updates": {
+    "Linux_Reseau": 35,
+    "Docker": 40,
+    "Kubernetes": 0,
+    "CI_CD": 0,
+    "Terraform": 0,
+    "Observabilite_Securite": 0,
+    "Ansible": 0
+  },
+  "key_lesson": "L'apprenant a maîtrisé les fondamentaux de Docker : création d'un Dockerfile, construction d'image, exécution de conteneurs avec mapping de ports, et documentation du processus. Il a également pris des décisions éclairées comme l'épinglage de version pour la reproductibilité.",
+  "recommendation": "Approfondir les concepts de réseaux Docker (bridge, host, overlay) et explorer l'utilisation de volumes pour la persistance des données, avant de passer à Docker Compose."
+}

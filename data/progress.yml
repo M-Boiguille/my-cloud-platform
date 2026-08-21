@@ -8,22 +8,33 @@ player:
     status: planned
     date: null
   active_courses:
+  - name: Git
+    url: https://kodekloud.com/courses/git-for-beginners/
+    completed_modules: 1
+    total_modules: 4
   - name: Shell Scripts for Beginners
     url: https://kodekloud.com/courses/shell-scripts-for-beginners/
     completed_modules: 1
     total_modules: 3
-  - name: Docker for Beginners
-    url: https://kodekloud.com/courses/docker-for-beginners/
-    completed_modules: 0
-    total_modules: 4
-
-completed_missions: []
+completed_missions:
+- mcp-001
 validated_concepts:
 - bash
-- shebang
-- variables
-- linux-basics
-- git-init
 - commit
+- containers
+- docker-images
+- docker-run
+- dockerfile
+- git-init
+- linux-basics
+- shebang
 - staging-area
-skills_overrides: {}
+- variables
+skills_overrides:
+  Linux_Reseau: 35
+  Docker: 40
+  Kubernetes: 0
+  CI_CD: 0
+  Terraform: 0
+  Observabilite_Securite: 0
+  Ansible: 0
