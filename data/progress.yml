@@ -16,32 +16,34 @@ player:
     url: https://www.gnu.org/software/bash/manual/bash.html
     completed_modules: 1
     total_modules: 3
-  - name: Kubernetes for Beginners
-    url: https://kubernetes.io/docs/home/
-    completed_modules: 0
-    total_modules: 4
-
 completed_missions:
 - mcp-001
+- mcp-002
 validated_concepts:
 - bash
 - commit
 - containers
+- deployments
 - docker-exec
 - docker-images
 - docker-network
 - docker-run
 - dockerfile
 - git-init
+- kubectl
 - linux-basics
+- pods
+- port-forward
+- replicasets
+- rolling-updates
 - shebang
 - staging-area
 - variables
 - volumes
 skills_overrides:
-  Linux_Reseau: 35
-  Docker: 80
-  Kubernetes: 5
+  Linux_Reseau: 30
+  Docker: 40
+  Kubernetes: 60
   CI_CD: 0
   Terraform: 0
   Observabilite_Securite: 0

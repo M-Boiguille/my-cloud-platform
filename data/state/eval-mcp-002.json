@@ -1,0 +1,25 @@
+{
+  "date": "2025-04-08",
+  "mission": "Déployer une application web avec Pods, ReplicaSets et Deployments",
+  "score": 100,
+  "concepts_valides": [
+    "pods",
+    "replicasets",
+    "deployments",
+    "kubectl",
+    "port-forward",
+    "rolling-updates"
+  ],
+  "concepts_a_revoir": [],
+  "skills_updates": {
+    "Linux_Reseau": 30,
+    "Docker": 40,
+    "Kubernetes": 60,
+    "CI_CD": 0,
+    "Terraform": 0,
+    "Observabilite_Securite": 0,
+    "Ansible": 0
+  },
+  "key_lesson": "La mission a permis de comprendre la différence fondamentale entre Pod, ReplicaSet et Deployment : le Pod est l'unité de base non recréée, le ReplicaSet maintient un nombre défini de Pods via les selectors, et le Deployment orchestre les mises à jour progressives avec rolling updates. La gestion de l'arrêt propre via SIGTERM et terminationGracePeriodSeconds est essentielle pour éviter des statuts Error lors des rolling updates.",
+  "recommendation": "Passer maintenant à l'utilisation des Services pour exposer l'application de manière stable (ClusterIP, NodePort), puis explorer ConfigMaps et Secrets pour la configuration et les données sensibles. Enfin, introduire Namespaces pour organiser les environnements et se rapprocher des pratiques de production."
+}
