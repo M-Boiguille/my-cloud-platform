@@ -158,6 +158,13 @@ def approve_pr(pr_number):
         "event": "APPROVE",
     }
     response = requests.post(url, headers=headers, json=data)
+    if response.status_code == 422:
+        print(
+            "Approbation API non applicable (HTTP 422). "
+            "Le commentaire de review est déjà posté. "
+            "Le Lead IA a validé la mission."
+        )
+        return None
     response.raise_for_status()
     return response.json()
 
