@@ -1,6 +1,6 @@
 # Conventions Git
 
-Ce document fixe les règles de nommage des branches et des commits pour maintenir un historique lisible par un recruteur.
+Ce document fixe les règles de nommage des branches et des commits pour maintenir un historique clair et traçable.
 
 ## Branches
 

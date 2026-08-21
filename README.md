@@ -1,70 +1,45 @@
 # My Cloud Platform
 
-Portfolio DevOps / SRE en reconstruction vers un profil **polyvalent et employable** : Linux, Docker, AWS, Terraform, CI/CD, Kubernetes, SRE et DevSecOps.
+Portfolio DevOps / SRE construit mission par mission, depuis les fondations jusqu'à l'ingénierie de plateforme.
 
-Chaque couche est d'abord implémentée **à la main** (`raw/`), puis versionnée avec l'outillage standard (`tooled/`). Cette méthode prouve que je comprends ce que chaque abstraction automatise.
+## Approche
 
-## Parcours de missions
+Chaque couche est d'abord implémentée **à la main** (`raw/`), puis industrialisée avec l'outillage standard (`tooled/`). Cette méthode oblige à comprendre ce que chaque abstraction cache avant de l'utiliser.
 
-Le moteur de missions génère le contexte et les évaluations. Les livrables sont écrits manuellement.
+## Parcours
 
 ```
-Phase 1 — Linux et scripting Bash/Python
-Phase 2 — Docker : images, conteneurs, réseaux
-Phase 3 — AWS + Terraform : infrastructure as code
-Phase 4 — CI/CD avec GitHub Actions
-Phase 5 — Kubernetes : k3s/EKS, manifests
-Phase 6 — SRE / Observabilité : Prometheus, Grafana
-Phase 7 — DevSecOps : sécurité, GitOps, cosign
-Phase 8 — Platform Engineering
+1 — Linux et scripting Bash/Python
+2 — Docker : images, conteneurs, réseaux
+3 — AWS + Terraform : infrastructure as code
+4 — CI/CD avec GitHub Actions
+5 — Kubernetes : k3s/EKS, manifests
+6 — SRE / Observabilité : Prometheus, Grafana
+7 — DevSecOps : sécurité, GitOps, cosign
+8 — Platform Engineering
 ```
-
-## Structure
-
-| Dossier | Rôle |
-|---------|------|
-| `infrastructure/terraform/raw/` | Ressources Terraform brutes (manuel) |
-| `infrastructure/terraform/modules/` | Modules Terraform communautaires (toole) |
-| `kubernetes/application/manifests-raw/` | Manifestes K8s bruts (manuel) |
-| `kubernetes/application/helm-chart/` | Chart Helm (toole) |
-| `kubernetes/policies/` | NetworkPolicy, PSS, Kyverno |
-| `cicd/github-actions/` | Pipelines raw et Marketplace |
-| `gitops/argocd/` | Applications Argo CD |
-| `observability/` | Prometheus, Grafana, Loki, instrumentation |
-| `chaos/` | Fault injection, aiops-agent |
-| `security/` | AppArmor, Seccomp, cosign, Falco |
-| `networking/docs/` | Schémas et cas de panne |
-| `docs/` | Architecture, runbooks, postmortems |
 
 ## Moteur de missions
 
-Le moteur est dans `core/`. Il génère le contexte de mission, ouvre une issue, relit la PR et évalue la progression.
+Le moteur dans `core/` génère le contexte de chaque mission, ouvre l'issue associée, relit les PR et évalue la progression. Les livrables sont écrits manuellement.
 
-Lancer une nouvelle mission : `gh workflow run generate-mission`.
+## Qualité et workflow
+
+- Conventional commits, lint et type checking en local.
+- Branches par mission, pull requests et revues (CodeRabbit + Lead IA).
+- CI/CD avec GitHub Actions : commitlint, review, merge, dashboard, Pages.
+- Documentation structurée : runbooks, decisions, `LEARNED.md`.
 
 ## Démarrer
 
-Si tu es débutant autodidacte, commence par le [Guide du débutant autodidacte](docs/ONBOARDING.md).
-
-## Conventions et workflow
-
-- [Guide du débutant autodidacte](docs/ONBOARDING.md)
+- [Documentation d'onboarding](docs/ONBOARDING.md)
 - [Workflow Git](docs/GIT_WORKFLOW.md)
 - [Workflows GitHub Actions](docs/WORKFLOWS.md)
 
-## Review assistée par CodeRabbit
+## Dashboard
 
-[![CodeRabbit](https://img.shields.io/badge/CodeRabbit-PR%20Review-FF6F61?logo=github)](https://github.com/M-Boiguille/my-cloud-platform/pulls)
+Les missions et la progression sont visibles ici :
 
-CodeRabbit est intégré en tant qu'application GitHub pour relire les PRs en complément du Lead IA pédagogique.
-
-### Pourquoi CodeRabbit
-
-- Review technique de code sans configuration YAML dans le repo
-- Chat interactif sur chaque PR
-- Gratuit pour les dépôts publics
-- Reconnu en entreprise
-
-### Utilisation
-
-CodeRabbit déclenche automatiquement une review à l'ouverture et à chaque mise à jour de PR.
+```text
+https://m-boiguille.github.io/my-cloud-platform/
+```

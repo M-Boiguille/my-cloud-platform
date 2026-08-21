@@ -1,40 +1,31 @@
-# Guide du débutant autodidacte
+# Onboarding
 
-Bienvenue dans `my-cloud-platform`. Ce guide t'explique comment utiliser ce portfolio pour apprendre à travailler en équipe, comme dans une vraie entreprise.
+Ce document décrit le fonctionnement du portfolio et le workflow utilisé pour le construire. Il sert à la fois de référence personnelle et de preuve de méthode.
 
-## Pourquoi ce guide
+## Objectif du portfolio
 
-Tu es autodidacte. Tu apprends seul. Mais en entreprise, tu ne travailleras **jamais** seul. Ce portfolio te fait pratiquer les rituels d'une équipe DevOps/SRE :
+Construire un profil DevOps/SRE polyvalent en partant des fondations. Chaque mission est un livrable concret, relu, validé et documenté.
 
-- Les branches Git
-- Les *pull requests*
-- Les revues de code
-- Les conventions de commit
-- Les *pipelines* CI/CD
-- La documentation technique
+## Méthode
 
-Un recruteur qui lira ce repo verra non seulement tes compétences techniques, mais aussi que tu sais déjà travailler proprement en équipe.
+Chaque couche technologique est d'abord implémentée à la main (`raw/`), puis outillée (`tooled/`). Cela oblige à comprendre ce que chaque outil automatise avant de l'utiliser.
 
-## Objectif
-
-Construire un portfolio DevOps/SRE en partant de zéro. Chaque mission est un mini-projet. Tu le réalises, un Lead IA (comme un senior) le relit, et tu le corriges jusqu'à validation.
-
-## Workflow d'une mission
+## Cycle d'une mission
 
 ```text
-1. Récupérer la mission en cours
-2. Créer une branche mission/mcp-XXX
-3. Travailler en local
-4. Tester avec make lint
-5. Commit et push
-6. Ouvrir une pull request
-7. Recevoir les retours (CodeRabbit + Lead IA)
-8. Corriger
-9. Merger
-10. Passer à la mission suivante
+1. Mission générée et ouverte sous forme d'issue
+2. Branche `mission/mcp-XXX` créée depuis main
+3. Travail en local, tests avec make lint
+4. Commit et push
+5. Pull request ouverte
+6. Revues : CodeRabbit (technique) + Lead IA (pédagogique)
+7. Corrections itératives
+8. Merge sur main
+9. Évaluation et mise à jour du profil
+10. Mission suivante générée
 ```
 
-## Commandes essentielles
+## Commandes principales
 
 ### Voir la mission en cours
 
@@ -42,7 +33,7 @@ Construire un portfolio DevOps/SRE en partant de zéro. Chaque mission est un mi
 python career.py --start
 ```
 
-### Voir ton profil
+### Voir le profil
 
 ```bash
 python career.py --status
@@ -60,83 +51,46 @@ python career.py --custom-mission "Kubernetes pods, deployments, replicasets"
 python career.py --submit
 ```
 
-## Git : le workflow d'entreprise
+## Workflow Git
 
-Ce portfolio impose le même workflow que tu trouveras dans la plupart des équipes DevOps.
+Les règles détaillées sont dans [GIT_WORKFLOW.md](GIT_WORKFLOW.md). En résumé :
 
-### Branches
+- Branche par mission : `mission/mcp-XXX`
+- Commits conventionnels : `type(scope): description`
+- Pull request pour chaque livrable
+- Squash ou rebase avant merge si l'historique est trop granulaire
 
-| Type | Format | Exemple |
-|------|--------|---------|
-| Mission | `mission/mcp-XXX` | `mission/mcp-001` |
-| Correction | `fix/...` | `fix/dashboard-json` |
-| Outil | `chore/...` | `chore/local-lint` |
-| Documentation | `docs/...` | `docs/runbook-mcp-001` |
-
-### Commits
-
-Chaque commit doit être clair. Format : `type(scope): description`
+## Checklist avant PR
 
 ```text
-mission(mcp-001): containerize web app with nginx
-feat(dashboard): add missions timeline
-fix(state): handle missing courses file
-docs(README): update employability path
+- [ ] make lint passe
+- [ ] Les livrables attendus sont présents
+- [ ] LEARNED.md est rédigé
+- [ ] Le runbook est à jour
+- [ ] Les commits sont propres et nommés
+- [ ] La PR a un titre explicite
 ```
 
-Pour les règles détaillées, voir [GIT_WORKFLOW.md](GIT_WORKFLOW.md).
+## Revue de code
 
-## Avant d'ouvrir une PR
+Deux sources de retour sur chaque PR :
 
-Checklist à suivre :
+- **CodeRabbit** : analyse technique du code.
+- **Lead IA** : évaluation par rapport aux critères d'acceptation de la mission.
 
-```text
-- [ ] J'ai testé ma mission en local
-- [ ] make lint est vert
-- [ ] J'ai un fichier LEARNED.md qui explique mes choix
-- [ ] Mon runbook est à jour
-- [ ] J'ai squashe mes commits si nécessaire
-- [ ] La PR est ouverte avec un titre clair
-```
+Les retours sont traités de la même façon qu'en équipe : correction, justification ou discussion dans la PR.
 
-## La revue de code
+## Compétences travaillées
 
-Deux outils relisent ton travail :
+Ce processus entraîne à :
 
-1. **CodeRabbit** : review technique automatique.
-2. **Lead IA** : review pédagogique basée sur les critères de la mission.
+- Versionner proprement avec Git.
+- Écrire des commits et des messages de PR clairs.
+- Documenter les choix techniques.
+- Recevoir et intégrer une revue.
+- Automatiser la qualité (lint, tests, CI/CD).
+- Construire un portfolio structuré et traçable.
 
-### Comment répondre
+## Workflows automatisés
 
-Tu n'as pas besoin de tout corriger. Si tu n'es pas d'accord, explique dans la PR pourquoi. Ce qui compte, c'est la discussion.
-
-Exemple :
-
-```text
-Merci pour le retour. J'ai modifié le Dockerfile pour utiliser nginx:1.31-alpine
-et j'ai documenté ce choix dans LEARNED.md.
-```
-
-## Pour le recruteur
-
-Ce repo démontre que l'auteur sait :
-
-- Utiliser Git en équipe (branches, PR, squash).
-- Écrire des commits conventionnels.
-- Documenter ses décisions techniques.
-- Accepter et appliquer une revue de code.
-- Automatiser avec CI/CD (GitHub Actions).
-- Construire un portfolio structuré et progressif.
-
-L'historique des PRs et des issues est public. Le recruteur peut voir le processus, pas seulement le résultat final.
-
-## Prochaines étapes
-
-1. Lire la mission en cours : `python career.py --start`
-2. Créer ta branche : `git checkout -b mission/mcp-XXX`
-3. Ouvrir une PR quand c'est prêt.
-
-Pour aller plus loin, voir :
-
-- [GIT_WORKFLOW.md](GIT_WORKFLOW.md) : détail des branches et commits
-- [WORKFLOWS.md](WORKFLOWS.md) : les GitHub Actions du projet
+Voir [WORKFLOWS.md](WORKFLOWS.md) pour le détail des GitHub Actions.

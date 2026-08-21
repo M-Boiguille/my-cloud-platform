@@ -54,9 +54,9 @@ gh workflow run generate-mission
 
 ## En résumé
 
-Pour toi, le workflow important est :
+En pratique, le workflow est le suivant :
 
-1. Tu pousses ta branche.
-2. `commitlint.yml` vérifie tes commits.
-3. `review-mission.yml` et CodeRabbit relisent ta PR.
-4. Quand tu merges, `complete-mission.yml` valide la mission.
+1. La branche est poussée.
+2. `commitlint.yml` vérifie les messages de commit.
+3. `review-mission.yml` et CodeRabbit relisent la PR.
+4. Au merge, `complete-mission.yml` valide la mission.
