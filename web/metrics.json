@@ -1,19 +1,19 @@
 {
   "player": "autodidact",
-  "level": "debutant",
+  "level": "junior",
   "target_level": "ingenieur-devops-polyvalent",
-  "missions_completed": 0,
+  "missions_completed": 1,
   "skills": {
-    "Linux / Réseau": 14,
-    "Docker": 0,
-    "Kubernetes": 0,
-    "CI/CD": 12,
+    "Linux / Réseau": 35,
+    "Docker": 80,
+    "Kubernetes": 5,
+    "CI/CD": 0,
     "Terraform": 0,
     "Observabilité": 0,
     "Ansible": 0
   },
-  "known_concepts_count": 7,
-  "upcoming_concepts_count": 184,
+  "known_concepts_count": 14,
+  "upcoming_concepts_count": 177,
   "active_courses": [
     "Git",
     "Shell Scripts for Beginners"
