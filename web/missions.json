@@ -44,6 +44,62 @@
         "runbook.md"
       ]
     },
+    "current": false
+  },
+  {
+    "mission_id": "mcp-002",
+    "title": "Déployer une application web avec Pods, ReplicaSets et Deployments",
+    "level": "junior",
+    "deadline": "1 semaine",
+    "estimated_time_minutes": 240,
+    "data": {
+      "mission_id": "mcp-002",
+      "title": "Déployer une application web avec Pods, ReplicaSets et Deployments",
+      "level": "junior",
+      "client_brief": "L'équipe de développement a préparé une image Docker `my-web-app:1.0`. Nous devons maintenant la déployer sur un cluster Kubernetes local (k3s ou minikube). Votre mission est de créer les objets Kubernetes de base : un Pod, un ReplicaSet et un Deployment, puis de comprendre comment Kubernetes garantit la disponibilité et la scalabilité.",
+      "description": "Dans cette mission, vous allez manipuler les trois objets fondamentaux de Kubernetes pour déployer une application. Vous créerez un Pod isolé pour observer le cycle de vie d'un conteneur, un ReplicaSet pour comprendre la réconciliation du nombre de réplicas, puis un Deployment pour gérer les mises à jour. Tout sera fait à la main (manifestes YAML) avant d'utiliser un outil de templating.",
+      "business_impact": "Kubernetes est le standard d'or pour l'orchestration de conteneurs. Maîtriser Pods, ReplicaSets et Deployments est la base pour déployer des applications résilientes et scalables en production.",
+      "constraints": "Tous les manifestes doivent être écrits à la main. Pas d'outil de templating (Helm, Kustomize) pour cette mission. Le cluster utilisé est k3s ou minikube. L'application doit être accessible via un port-forward.",
+      "deadline": "1 semaine",
+      "new_concepts": [
+        "pod",
+        "replicaset",
+        "deployment",
+        "kubectl",
+        "port-forward"
+      ],
+      "prerequisites": [
+        "containers",
+        "dockerfile",
+        "docker-run",
+        "docker-images",
+        "linux-basics",
+        "bash"
+      ],
+      "learning_links": [
+        "https://kubernetes.io/docs/concepts/workloads/pods/",
+        "https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/",
+        "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"
+      ],
+      "acceptance_criteria": [
+        "Un manifeste `pod.yaml` crée un Pod unique nommé `my-web-pod` avec l'image `my-web-app:1.0` et expose le port 80.",
+        "Un manifeste `replicaset.yaml` crée un ReplicaSet nommé `my-web-rs` avec 3 réplicas du Pod.",
+        "Un manifeste `deployment.yaml` crée un Deployment nommé `my-web-deploy` avec 3 réplicas et une stratégie RollingUpdate.",
+        "Les commandes `kubectl apply -f` fonctionnent dans l'ordre pod, replicaset, deployment.",
+        "Les commandes `kubectl get pods`, `kubectl get rs`, `kubectl get deployments` montrent les objets Running.",
+        "Le port-forward `kubectl port-forward pod/my-web-pod 8080:80` rend l'application accessible sur `http://localhost:8080`.",
+        "Un `runbook.md` explique les commandes `kubectl apply`, `get`, `describe`, `delete`, `port-forward`.",
+        "Un `LEARNED.md` explique la différence entre Pod, ReplicaSet et Deployment."
+      ],
+      "estimated_time_minutes": 240,
+      "deliverables": [
+        "pod.yaml",
+        "replicaset.yaml",
+        "deployment.yaml",
+        "runbook.md",
+        "LEARNED.md"
+      ]
+    },
     "current": true
   }
 ]
