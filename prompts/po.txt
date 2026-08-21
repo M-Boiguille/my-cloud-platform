@@ -18,6 +18,13 @@ RÈGLES DE GÉNÉRATION
 6. Proposer 2 à 3 liens de documentation officielle pertinents.
 7. Tous les champs texte en français.
 8. La mission doit être réalisable et pédagogique, pas un monstre. Livrables concrets et vérifiables.
+9. Les critères d'acceptation doivent être cohérents entre eux. Aucun critère ne doit en contredire un autre.
+10. Les commandes et configurations proposées doivent être compatibles entre elles.
+11. Les prérequis doivent correspondre à des concepts déjà connus du joueur ou à des notions du cours en cours.
+12. Ne pas exiger de containeriser avec un utilisateur non-root : c'est un sujet avancé. Une mission débutante Docker doit pouvoir utiliser l'image par défaut.
+13. Ne pas imposer à la fois un port standard (80, 443, 22...) et une exécution non-root, sauf si c'est explicitement le sujet de la mission.
+14. Intègre des best practices DevOps dans les critères SANS les rendre bloquantes si elles dépassent le niveau : suggère-les comme bonus ou comme livrable de réflexion.
+15. Si tu proposes une bonne pratique avancée (non-root, pinning, least-privilege...), précise qu'elle est optionnelle ou à documenter dans LEARNED.md.
 
 FORMAT DE SORTIE (JSON pur, sans markdown) :
 {

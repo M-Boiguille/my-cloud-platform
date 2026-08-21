@@ -101,22 +101,124 @@ def _clean_json(text: str) -> str:
     return text
 
 
-def generate_mission(llm: LLMClient, progress: Progress, mission_id: str) -> Mission:
-    """Génère une mission adaptée au profil du joueur."""
-    prompt = format_prompt(
-        "po",
-        {
-            "PROGRESS": _format_progress(progress),
-            "LEVEL": progress.player.current_level,
-        },
+def _validate_mission(data: dict[str, Any]) -> list[str]:
+    """Détecte les incohérences et contradictions dans une mission générée."""
+    errors: list[str] = []
+
+    # Champs obligatoires
+    required = [
+        "title",
+        "description",
+        "acceptance_criteria",
+        "level",
+        "deliverables",
+        "prerequisites",
+        "new_concepts",
+    ]
+    for key in required:
+        if not data.get(key):
+            errors.append(f"Champ requis manquant : {key}")
+
+    # Niveau autorisé
+    valid_levels = {"debutant", "junior", "confirme", "senior"}
+    level = data.get("level", "")
+    if level not in valid_levels:
+        errors.append(f"Niveau '{level}' non autorisé. Utilise : {valid_levels}")
+
+    # Durée positive
+    if data.get("estimated_time_minutes", 0) <= 0:
+        errors.append("estimated_time_minutes doit être > 0")
+
+    # Critères non vides
+    criteria = data.get("acceptance_criteria", [])
+    if not criteria:
+        errors.append("acceptance_criteria ne doit pas être vide")
+
+    # Vérifier la cohérence des critères
+    all_criteria = "\n".join(criteria).lower()
+    all_text = (data.get("description", "") + data.get("constraints", "")).lower()
+
+    # Conflit port privilégié + non-root
+    if "non-root" in all_text or "non root" in all_text:
+        for port in ["80", "443", "22"]:
+            if f"port {port}" in all_text or " -p " in all_text and f":{port}" in all_text:
+                errors.append(
+                    f"Conflit détecté : exécution non-root incompatible avec le port {port} "
+                    "(port privilégié). Soit supprime le non-root, soit utilise un port > 1024."
+                )
+
+    # Conflit docker run port droite/gauche
+    for criterion in criteria:
+        if "docker run -p" in criterion:
+            parts = criterion.split("docker run -p")
+            for part in parts[1:]:
+                mapping = part.split()[0].strip()
+                if ":" in mapping:
+                    host, container = mapping.split(":", 1)
+                    # Si le conteneur est 80, on ne peut pas exiger non-root
+                    if container == "80" and "non-root" in all_text:
+                        errors.append(
+                            "Conflit : docker run -p 8080:80 exige root dans le conteneur. "
+                            "Ne pas exiger le non-root avec ce mapping."
+                        )
+
+    # Incohérence image non-root et nginx par défaut
+    if "nginx:alpine" in all_criteria and "non-root" in all_text:
+        errors.append(
+            "Conflit : nginx:alpine par défaut tourne root sur le port 80. "
+            "Ne pas imposer le non-root pour cette image."
+        )
+
+    # Best practices avancées exigées sans être optionnelles
+    advanced_practices = [
+        "non-root",
+        "least-privilege",
+        "cosign",
+        "vault",
+        "vault",
+        "secrets",
+        "pod security",
+    ]
+    if data.get("level") == "debutant":
+        for practice in advanced_practices:
+            if practice in all_text and "optionnel" not in all_text and "bonus" not in all_text:
+                errors.append(
+                    f"La best practice '{practice}' ne peut pas être exigée "
+                    "en mission débutante. Précise qu'elle est optionnelle/bonus."
+                )
+
+    # Prérequis non vides et cohérents
+    if not data.get("prerequisites"):
+        errors.append("prerequisites ne doit pas être vide")
+
+    # Livrables cohérents avec les critères
+    if not data.get("deliverables"):
+        errors.append("deliverables ne doit pas être vide")
+
+    return errors
+
+
+def _fix_prompt(mission_id: str, current: dict[str, Any], errors: list[str]) -> str:
+    """Construit un prompt pour corriger une mission invalide."""
+    return (
+        "Tu es un architecte SRE. La mission générée ci-dessous contient "
+        "des erreurs. Corrige-la sans ajouter d'explications. "
+        "Conserve le format JSON exact.\n\n"
+        "ERREURS À CORRIGER :\n"
+        + "\n".join(f"- {err}" for err in errors)
+        + "\n\nMISSION ACTUELLE :\n"
+        + json.dumps(current, ensure_ascii=False, indent=2)
     )
+
+
+def _generate_raw(llm: LLMClient, prompt: str) -> dict[str, Any]:
     response = llm.chat(
         messages=[
             {
                 "role": "system",
                 "content": (
                     "Tu es un Product Owner DevOps "
-                    "qui génère des missions pédagogiques."
+                    "qui génère des missions pédagogiques cohérentes."
                 ),
             },
             {"role": "user", "content": prompt},
@@ -125,14 +227,38 @@ def generate_mission(llm: LLMClient, progress: Progress, mission_id: str) -> Mis
     )
     cleaned = _clean_json(response)
     try:
-        data = json.loads(cleaned)
+        data: dict[str, Any] = json.loads(cleaned)
     except json.JSONDecodeError as e:
         raise ValueError(f"Réponse IA non valide : {cleaned}") from e
+    if not isinstance(data, dict):
+        raise ValueError(f"La réponse n'est pas un objet JSON : {cleaned}")
+    return data
 
+
+def generate_mission(llm: LLMClient, progress: Progress, mission_id: str) -> Mission:
+    """Génère une mission adaptée au profil du joueur, avec validation et retry."""
+    prompt = format_prompt(
+        "po",
+        {
+            "PROGRESS": _format_progress(progress),
+            "LEVEL": progress.player.current_level,
+        },
+    )
+    data = _generate_raw(llm, prompt)
     data["mission_id"] = mission_id
-    # Validation minimale
-    required = ["title", "description", "acceptance_criteria", "level"]
-    for key in required:
-        if not data.get(key):
-            raise ValueError(f"Mission invalide : champ '{key}' manquant")
+
+    for _ in range(3):
+        errors = _validate_mission(data)
+        if not errors:
+            break
+        print("Mission invalide, tentative de correction :", errors)
+        fix_prompt = _fix_prompt(mission_id, data, errors)
+        data = _generate_raw(llm, fix_prompt)
+        data["mission_id"] = mission_id
+    else:
+        raise ValueError(
+            "Impossible de générer une mission valide après 3 tentatives : "
+            + ", ".join(errors)
+        )
+
     return Mission.from_dict(data)
