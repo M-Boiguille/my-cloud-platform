@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    type: web-app
+  name: my-web-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: web-app
+  template:
+    metadata:
+      labels:
+        type: web-app
+      name: my-web-pod
+    spec:
+      containers:
+        - image: my-web-app:1.0
+          name: my-web-app-container
